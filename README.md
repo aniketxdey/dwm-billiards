@@ -1,18 +1,22 @@
-# Neural Pool — Diffusion World Model for Billiards
+# Neural Pool - Diffusion World Model for Billiards
 
-A learned world model that predicts future frames of a 2D billiards game from actions alone. The system trains a **convolutional VAE** to compress frames into a spatial latent space, then trains an **action-conditioned Diffusion Transformer (DiT)** to autoregressively generate future latents given context frames and player actions. Inference runs in real time via DDIM sampling with optional interactive play through a browser UI.
+Diffusion-based world model that predicts future frames of a 2D billiards game from actions alone, with accurate physics. The system trains a **convolutional VAE** to compress frames into a spatial latent space, then trains an **action-conditioned Diffusion Transformer (DiT)** to autoregressively generate future latents given context frames and player actions. Inference runs in real time via DDIM sampling with optional interactive play through a browser UI.
 
 https://github.com/user-attachments/assets/1c44df17-dda8-4185-af50-38ea8b0315d0
 
 ## Methodology
 
-**Data generation.** A pymunk-based 2D physics simulator renders billiards episodes at 128×72 resolution, 30 FPS. An automated bot executes shots with varied strategies (scoring, banking, chaos, breaking). Three dataset versions increase in diversity: v1 (100k episodes, fixed physics), v2 (100k episodes, randomized table physics and spawn layouts), and v3 (200k episodes, collision-heavy biasing with denser ball configurations). Each episode produces 600 RGB frames, per-frame actions `[force_x, force_y, trigger]`, and ball state vectors, stored as compressed `.npz` shards on S3.
+### 1) Data generation
+A pymunk-based 2D physics simulator renders billiards episodes at 128×72 resolution, 30 FPS. An automated bot executes shots with varied strategies (scoring, banking, chaos, breaking). Three dataset versions increase in diversity: v1 (100k episodes, fixed physics), v2 (100k episodes, randomized table physics and spawn layouts), and v3 (200k episodes, collision-heavy biasing with denser ball configurations). Each episode produces 600 RGB frames, per-frame actions `[force_x, force_y, trigger]`, and ball state vectors, stored as compressed `.npz` shards on S3.
 
-**VAE.** A convolutional VAE with spatial latents (4 channels, 9×16 spatial) is trained on raw frames with an L1 + LPIPS + KL loss. The trained encoder converts the full dataset into latent shards for downstream training.
+### 2) VAE
+A convolutional VAE with spatial latents (4 channels, 9×16 spatial) is trained on raw frames with an L1 + LPIPS + KL loss. The trained encoder converts the full dataset into latent shards for downstream training.
 
-**World model.** An action-conditioned DiT predicts noise in the VAE latent space (DDPM formulation). Given 8 context latent frames and an action, it denoises a target latent for the next frame. Two training regimes are used: (1) **baseline** single-step prediction, and (2) **diffusion forcing**, which unrolls multi-step predictions during training with a decaying teacher-forcing schedule for improved long-horizon consistency. A **distillation** pipeline compresses a large teacher into a smaller student model.
+### 3) World Model
+An action-conditioned DiT predicts noise in the VAE latent space (DDPM formulation). Given 8 context latent frames and an action, it denoises a target latent for the next frame. Two training regimes are used: (1) **baseline** single-step prediction, and (2) **diffusion forcing**, which unrolls multi-step predictions during training with a decaying teacher-forcing schedule for improved long-horizon consistency. A **distillation** pipeline compresses a large teacher into a smaller student model.
 
-**Inference.** Autoregressive DDIM rollouts in latent space, decoded back to pixels by the VAE. Served through a CLI preview tool, a Gradio UI with live aiming, or a FastAPI WebSocket endpoint for real-time play.
+### 4) Inference
+Autoregressive DDIM rollouts in latent space, decoded back to pixels by the VAE. Served through a CLI preview tool, a Gradio UI with live aiming, or a FastAPI WebSocket endpoint for real-time play.
 
 ## Repository Structure
 
