@@ -1,0 +1,10 @@
+torch>=2.2.0
+torchvision>=0.17.0
+numpy>=1.24.0,<1.25
+PyYAML>=6.0
+tqdm>=4.66.0
+Pillow>=10.0.0
+imageio>=2.34.0
+imageio-ffmpeg>=0.5.1
+wandb>=0.17.0
+lpips>=0.1.4

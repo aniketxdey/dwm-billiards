@@ -1,0 +1,20 @@
+{
+  "run_id": "full_v3collision_20260223_094313",
+  "ec2": {
+    "instance_type": "c7i.48xlarge",
+    "script_name": "remote_full_run.primary.sh",
+    "workers": 64,
+    "InstanceId": "i-005916907dd328b52",
+    "PrivateIp": "172.31.94.81",
+    "State": "running",
+    "InstanceType": "c7i.48xlarge"
+  },
+  "ssm": {
+    "CommandId": "0094f517-bbf9-41d2-99af-c026712babd4",
+    "Status": "Pending",
+    "RequestedDateTime": "2026-02-23T11:45:03.228000-05:00"
+  },
+  "remote_script_s3": "s3://videogen-pool-v2-237586137680/ops/runs/full_v3collision_20260223_094313/remote_full_run.primary.sh",
+  "region": "us-east-1",
+  "profile": "codex"
+}

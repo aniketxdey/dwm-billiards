@@ -1,0 +1,72 @@
+[
+  {
+    "tag":"ctx8_60m",
+    "model_name":"ctx8_60m",
+    "psnr_h16":19.0642772929,
+    "psnr_h32":18.046420193,
+    "mse_h16":0.9790412188,
+    "mse_h32":3.816873312,
+    "finished_at":"2026-02-21 21:07:07 UTC",
+    "eval_id":"rollout_eval_ctx8_vs_ctx12_60m_rerun_20260221_210642"
+  },
+  {
+    "tag":"ctx8_60m",
+    "model_name":"ctx12_60m",
+    "psnr_h16":18.7155126241,
+    "psnr_h32":14.5618779175,
+    "mse_h16":3.1863114834,
+    "mse_h32":149.1607666016,
+    "finished_at":"2026-02-21 21:07:07 UTC",
+    "eval_id":"rollout_eval_ctx8_vs_ctx12_60m_rerun_20260221_210642"
+  },
+  {
+    "tag":"ctx8_dfv0_2xh100_120m",
+    "model_name":"ctx8_baseline_2xh100_60m",
+    "psnr_h16":17.1332622741,
+    "psnr_h32":14.85735166,
+    "mse_h16":54.023059845,
+    "mse_h32":318.3116455078,
+    "finished_at":"2026-02-22 13:51:32 UTC",
+    "eval_id":"rollout_eval_ctx8_baseline_vs_dfv0_2xh100_20260222_135113"
+  },
+  {
+    "tag":"ctx8_dfv0_2xh100_120m",
+    "model_name":"ctx8_dfv0_2xh100_120m",
+    "psnr_h16":19.4465129696,
+    "psnr_h32":19.3716588523,
+    "mse_h16":0.7627291083,
+    "mse_h32":0.8270143867,
+    "finished_at":"2026-02-22 13:51:32 UTC",
+    "eval_id":"rollout_eval_ctx8_baseline_vs_dfv0_2xh100_20260222_135113"
+  },
+  {
+    "tag":"joint_686m_final",
+    "model_name":"joint_686m_final",
+    "psnr_h16":18.729539272,
+    "psnr_h32":18.411600279,
+    "mse_h16":0.6960068941,
+    "mse_h32":0.987185359,
+    "finished_at":"2026-02-23 13:07:12 UTC",
+    "eval_id":"rollout_eval_joint_686m_final_full_20260223"
+  },
+  {
+    "tag":"joint_1521m_final",
+    "model_name":"joint_1521m_final",
+    "psnr_h16":19.1135135948,
+    "psnr_h32":18.7173286909,
+    "mse_h16":0.7668972015,
+    "mse_h32":1.0022051334,
+    "finished_at":"2026-02-26 13:32:41 UTC",
+    "eval_id":"rollout_eval_joint_1521m_final_preview_$(date -u +%Y%m%d_%H%M%S)"
+  },
+  {
+    "tag":"joint_1521m_resume360_final",
+    "model_name":"joint_1521m_resume360_final",
+    "psnr_h16":19.1504991335,
+    "psnr_h32":18.2652863917,
+    "mse_h16":0.6690781713,
+    "mse_h32":0.9893218875,
+    "finished_at":"2026-02-27 18:48:32 UTC",
+    "eval_id":"rollout_eval_joint_1521m_resume360_final_preview_ddim20_20260226"
+  }
+]

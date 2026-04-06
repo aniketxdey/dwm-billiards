@@ -1,0 +1,69 @@
+run:
+  id_prefix: dit_df_joint_v1v2_ctx8_2xh100_573m
+  seed: 52
+  output_root: ./world_model_training/runs
+  source_latent_s3_root: s3://videogen-pool-v2-237586137680/latents_v1 + s3://videogen-pool-v2-237586137680/latents_v2
+  source_latent_local_root: /home/ubuntu/neural-pool (joint via manifests)
+  target_samples: 120000000
+  checkpoint_every_samples: 2000000
+  log_every_steps: 100
+  eval_every_steps: 1000
+  save_optimizer_state: true
+
+data:
+  shards_dir: /home/ubuntu/neural-pool/latents_v2/latents_v2diverse_20260222_154743_watch01/shards
+  train_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2_full_200k/train_shards.txt
+  val_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2_full_200k/val_shards.txt
+  context_len: 8
+  val_shards: 0
+  batch_size: 256
+  drop_last: true
+  num_workers: 12
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+  shuffle_shards: true
+  shuffle_within_episode: true
+
+model:
+  latent_channels: 4
+  latent_h: 9
+  latent_w: 16
+  d_model: 1536
+  n_heads: 24
+  n_layers: 20
+  mlp_ratio: 4.0
+  dropout: 0.0
+  action_dim: 3
+
+diffusion:
+  timesteps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+
+diffusion_forcing:
+  enabled: true
+  rollout_steps: 2
+  teacher_forcing_prob_start: 0.95
+  teacher_forcing_prob_end: 0.10
+  teacher_forcing_decay_samples: 60000000
+  detach_predicted_context: true
+
+optimizer:
+  lr: 0.0001
+  weight_decay: 0.0001
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+eval:
+  val_batches: 20
+
+wandb:
+  enabled: true
+  project: video_generation_project202
+  entity: ""
+  group: dit_df_joint_v1v2_573m_2xh100
+  tags: ["world-model", "dit", "df", "ctx8", "joint-v1v2", "573m", "2xh100", "120m", "fallback"]

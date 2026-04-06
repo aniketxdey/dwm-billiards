@@ -1,0 +1,24 @@
+{
+  "eval_id": "rollout_eval_joint_1521m_resume360_long_h256_ddim20_20260227",
+  "finished_at": "2026-02-27 18:58:27 UTC",
+  "horizons": [
+    256
+  ],
+  "models": {
+    "joint_1521m_resume360_final": {
+      "latent_mse": {
+        "256": 1.080599308013916
+      },
+      "latent_mae": {
+        "256": 0.544373631477356
+      },
+      "frame_psnr": {
+        "256": 18.25129775537022
+      },
+      "frame_l1": {
+        "256": 0.03294587880373001
+      }
+    }
+  },
+  "rankings": {}
+}

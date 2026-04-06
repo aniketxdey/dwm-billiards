@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\title{Physics-Aware Action-Conditioned World Modeling for Billiards\\
+\large DiT + Diffusion Forcing on Large Synthetic Multi-Run Datasets}
+\author{Your Name \\ CS89/189 Final Project}
+\date{\today}
+
+\begin{document}
+\maketitle
+\doublespacing
+
+\begin{abstract}
+This project studies whether diffusion transformers can preserve physics in an interactive, action-conditioned billiards simulator, and whether diffusion forcing improves long-horizon rollouts. We build a full pipeline: simulation data, VAE latent compression, DiT world-model training, rollout evaluation, and interactive inference tools. The core question is whether multi-step diffusion forcing preserves game logic better than single-step diffusion training. Across multiple runs and model scales, diffusion forcing strongly improves long-horizon stability. Remaining failure modes are mostly identity consistency (color drift and occasional object swallowing), which motivates targeted follow-up losses.
+\end{abstract}
+
+\section{Introduction}
+World models predict future observations conditioned on actions, enabling simulation and interactive generation. Recent diffusion-transformer systems can look realistic, but preserving physical logic over rollout is still hard. We focus on billiards because it gives explicit checks: do balls bounce correctly, collide correctly, and remain consistent identities over time?
+
+Our novelty is to treat \textit{interactive physics consistency} as the main target, not only visual quality. We test single-step DiT versus DiT+diffusion forcing under the same data and evaluation pipeline, and we inspect both metric trends and failure modes.
+
+\section{Related Work}
+Our approach builds on DDPM \cite{ho2020ddpm}, DDIM \cite{song2021ddim}, latent diffusion \cite{rombach2022ldm}, DiT \cite{peebles2023dit}, and VAE latent modeling \cite{kingma2014vae}. We also draw motivation from world models \cite{ha2018worldmodels, hafner2023dreamerv3} and action-conditioned diffusion gameplay work such as Oasis \cite{oasisrepo, oasisblog}.
+
+\section{Problem Setup}
+At each time step $t$, we observe:
+\begin{align}
+x_t \in \mathbb{R}^{72\times 128\times 3},\quad
+a_t \in \mathbb{R}^{3},\quad
+s_t \in \mathbb{R}^{16\times 4},
+\end{align}
+where $a_t=[f_x,f_y,\text{trigger}]$ and $s_t$ stores per-ball simulator state (position and velocity channels).
+
+We train a world model to generate $x_{t+1:t+H}$ conditioned on past context and future actions. In practice we work in latent space $z_t\in\mathbb{R}^{4\times 9\times 16}$ for efficiency.
+
+\section{Data and Pipeline}
+\subsection{Data generation}
+We generated three dataset lineages with different goals:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{v1} (100,000 episodes): baseline coverage.
+  \item \textbf{v2} (100,000 episodes): more diverse setups and trajectories.
+  \item \textbf{v3} (200,000 episodes): collision-heavy distribution for hard-contact dynamics.
+\end{itemize}
+Each episode has 600 frames, for 400,000 episodes total. This staged dataset design was central to improving robustness.
+
+\subsection{VAE stage}
+Frames are compressed by a VAE to 4-channel $9\times 16$ latents (about $48\times$ element compression). We use this latent space for all world-model training and decode for evaluation and visualization.
+
+\subsection{Action-conditioned diffusion model}
+Given context length $L$, the model receives $z_{t-L+1:t}$, action $a_t$, and noisy target latent $x_t^{(\tau)}$, and predicts noise $\hat{\epsilon}_\theta$.
+
+Forward diffusion:
+\begin{align}
+x_\tau = \sqrt{\bar{\alpha}_\tau}\,x_0 + \sqrt{1-\bar{\alpha}_\tau}\,\epsilon,\quad \epsilon\sim\mathcal{N}(0,I).
+\end{align}
+
+Single-step baseline loss:
+\begin{align}
+\mathcal{L}_{\text{base}} = \mathbb{E}\left[\|\hat{\epsilon}_\theta - \epsilon\|_2^2\right].
+\end{align}
+
+\subsection{Diffusion forcing}
+For rollout length $K$, we train over multiple future steps:
+\begin{align}
+\mathcal{L}_k = \|\hat{\epsilon}_k-\epsilon_k\|_2^2,\quad
+\mathcal{L}_{\text{DF}} = \frac{1}{K}\sum_{k=1}^{K}\mathcal{L}_k.
+\end{align}
+Predicted clean latent estimate:
+\begin{align}
+\hat{x}_{0,k} = \frac{x_{\tau,k} - \sqrt{1-\bar{\alpha}_\tau}\,\hat{\epsilon}_k}{\sqrt{\bar{\alpha}_\tau}}.
+\end{align}
+Context for the next step is updated with scheduled teacher forcing:
+\begin{align}
+\tilde{z}_{k+1}=m_k z_{k+1}^{\text{gt}}+(1-m_k)\hat{x}_{0,k},\quad
+m_k\sim\text{Bernoulli}(p_{\text{tf}}(n)),
+\end{align}
+where $p_{\text{tf}}(n)$ decays over processed samples $n$. This reduces train-test mismatch by exposing training to self-generated contexts.
+
+\section{Experimental Setup}
+\subsection{Model and training}
+We trained multiple scales, culminating in a 1.52B-parameter DiT+DF model ($d_{\text{model}}=2048$, 30 layers, 32 heads) on 2x H100 using distributed data parallel training.
+
+\subsection{Evaluation protocol}
+We use fixed-horizon rollout eval with latent and frame metrics at horizons
+$h\in\{1,4,8,16,32\}$:
+\begin{itemize}[leftmargin=*]
+  \item latent MSE and latent MAE
+  \item frame PSNR and frame L1
+\end{itemize}
+Inference sampling uses DDIM \cite{song2021ddim} for practical speed/quality tradeoffs.
+
+\section{Results}
+\subsection{Baseline vs diffusion forcing}
+The clearest result is baseline versus DF at context length 8:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Model & MSE@16 & MSE@32 & PSNR@16 & PSNR@32 \\
+\midrule
+DiT baseline & 54.023 & 318.312 & 17.133 & 14.857 \\
+DiT + DF & 0.763 & 0.827 & 19.447 & 19.372 \\
+\bottomrule
+\end{tabular}
+\caption{Long-horizon rollout quality (lower MSE better, higher PSNR better).}
+\label{tab:baseline_df}
+\end{table}
+
+DF improves long-horizon stability by a large margin. Qualitatively, trajectories and collisions remain coherent for longer rollouts.
+
+\subsection{Scaling and checkpoint progression}
+Scaling from mid-size to larger models improved short- and mid-horizon quality, though not all long-horizon metrics were monotonic.
+
+\subsection{Interactive physics findings}
+In interactive tests, wall-bounce behavior was generally correct and collision behavior improved substantially after DF plus v3 collision-heavy data. The main remaining issue is identity consistency: some balls still drift in color or occasionally swallow/merge under complex contact. This suggests dynamics are learned better than persistent appearance identity.
+
+Qualitative media is included as supplementary GIFs: VAE reconstruction comparison and latest model rollout preview.
+
+\section{Novelty and Main Discovery}
+Our novelty is the explicit hypothesis test in a controlled physics game:
+\begin{quote}
+Can diffusion transformers preserve physical logic better when trained with diffusion forcing rather than single-step diffusion loss?
+\end{quote}
+
+Our experiments suggest yes, especially at long horizons where error accumulation dominates. Diffusion forcing trains under conditions closer to inference and improves rollout robustness in interactive physics scenarios.
+
+\section{Limitations and Future Work}
+\subsection{Current limitations}
+\begin{itemize}[leftmargin=*]
+  \item Identity consistency (color/object permanence) remains weaker than motion prediction.
+  \item Interactive inference is still slower than true real-time gameplay.
+  \item Distillation path is still under stabilization.
+\end{itemize}
+
+\subsection{Planned next steps}
+\begin{itemize}[leftmargin=*]
+  \item Add color-consistency auxiliary loss on predicted $x_0$ (ball-focused, simulator-mask-aware).
+  \item Increase collision-focused sampling while keeping uniform sampling mix.
+  \item Complete student distillation for lower-latency interactive inference.
+  \item Evaluate DDIM-step and horizon tradeoffs for playable experience.
+\end{itemize}
+
+\section{Conclusion}
+This project demonstrates that DiT+DF is an effective direction for action-conditioned billiards world modeling. The main takeaway is that diffusion forcing materially improves long-horizon physical stability versus single-step training. We reached credible wall-bounce and collision behavior, while identifying remaining bottlenecks in identity consistency and inference speed. The next phase is targeted identity losses and stabilized distillation for faster interactive rollout.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

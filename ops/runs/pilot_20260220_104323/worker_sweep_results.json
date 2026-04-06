@@ -1,0 +1,42 @@
+{
+  "benchmark_id": "worker_sweep_20260220",
+  "instance_id": "i-010b1d74113e693d5",
+  "instance_type": "c7i.24xlarge",
+  "vcpus_reported": 96,
+  "episodes_per_test": 1000,
+  "frames_per_episode": 600,
+  "shard_size": 100,
+  "tests": [
+    {
+      "workers": 32,
+      "duration_sec": 125,
+      "avg_eps": 8.01,
+      "total_min_reported": 2.1
+    },
+    {
+      "workers": 48,
+      "duration_sec": 126,
+      "avg_eps": 7.92,
+      "total_min_reported": 2.1
+    },
+    {
+      "workers": 64,
+      "duration_sec": 130,
+      "avg_eps": 7.75,
+      "total_min_reported": 2.2
+    },
+    {
+      "workers": 80,
+      "duration_sec": 130,
+      "avg_eps": 7.66,
+      "total_min_reported": 2.2
+    },
+    {
+      "workers": 96,
+      "duration_sec": 134,
+      "avg_eps": 7.52,
+      "total_min_reported": 2.2
+    }
+  ],
+  "recommended_workers_for_full_run": 32
+}

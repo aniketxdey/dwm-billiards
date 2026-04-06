@@ -1,0 +1,29 @@
+{
+  "run_id": "full_v3collision_20260223_094313",
+  "variant": "data_generation_package_v3_collision_heavy",
+  "target": {
+    "episodes": 200000,
+    "frames_per_episode": 600,
+    "shard_size": 100
+  },
+  "s3": {
+    "data_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v3/full_v3collision_20260223_094313",
+    "log_prefix": "s3://videogen-pool-v2-237586137680/ops/runs/full_v3collision_20260223_094313",
+    "artifact_uri": "s3://videogen-pool-v2-237586137680/ops/artifacts/full_v3collision_20260223_094313/data_generation_package_v3.tar.gz"
+  },
+  "ec2": {
+    "region": "us-east-1",
+    "ami_id": "ami-0f3caa1cf4417e51b",
+    "subnet_id": "subnet-0540d17208e07bb0f",
+    "security_group_id": "sg-0cd6b54e100af5aad",
+    "instance_profile": "NeuralPoolEc2RunnerProfile",
+    "instance_type_primary": "c7i.48xlarge",
+    "instance_type_fallback": "c7i.24xlarge"
+  },
+  "workers": {
+    "primary": 64,
+    "fallback": 32
+  },
+  "seed": 4343,
+  "git_head": "5d720a5"
+}

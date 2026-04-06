@@ -1,0 +1,66 @@
+{
+  "data_runs": [
+    {
+      "run_label": "v1_full_20260220_112101",
+      "episodes": 100000,
+      "frames_per_episode": 600,
+      "total_frames": 60000000,
+      "shard_size_episodes": 100,
+      "s3_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101"
+    },
+    {
+      "run_label": "v2_diverse_20260222_154743",
+      "episodes": 100000,
+      "frames_per_episode": 600,
+      "total_frames": 60000000,
+      "shard_size_episodes": 100,
+      "s3_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v2/full_v2diverse_20260222_154743"
+    },
+    {
+      "run_label": "v3_collision_20260223_094313",
+      "episodes": 200000,
+      "frames_per_episode": 600,
+      "total_frames": 120000000,
+      "shard_size_episodes": 100,
+      "s3_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v3/full_v3collision_20260223_094313"
+    }
+  ],
+  "vae_run": {
+    "run_id": "vae_60m_1xa100_20260220_204310_run01",
+    "checkpoint": "ckpt_60000000.pt",
+    "wandb_run": "hqzimuvd",
+    "notes": "60M frame streaming training on 1x A100"
+  },
+  "world_model_runs": [
+    {
+      "run_id": "dit_60m_1xa100_20260221_185520_resume5m",
+      "label": "ctx8 baseline 60M",
+      "config": "world_model_training/configs/dit_60m_1xa100.yaml"
+    },
+    {
+      "run_id": "dit_60m_ctx12_1xa100_20260221_192300_run01",
+      "label": "ctx12 ablation 60M",
+      "config": "world_model_training/configs/dit_60m_context12_1xa100.yaml"
+    },
+    {
+      "run_id": "ctx8_dfv0_2xh100_120m",
+      "label": "Diffusion Forcing v0 (ctx8)",
+      "eval_summary": "samples/samples/world_model_eval_df_v0_20260222/summary.json"
+    },
+    {
+      "run_id": "joint_686m_final",
+      "label": "Joint v1+v2 model (~686M)",
+      "eval_summary": "samples/samples/world_model_eval_joint_686m_final_full_20260223/summary.json"
+    },
+    {
+      "run_id": "joint_1521m_final",
+      "label": "Joint v1+v2+v3 model (~1.52B)",
+      "eval_summary": "samples/samples/world_model_eval_joint_1521m_final_preview_20260226/rollout_eval_joint_1521m_final_preview_20260226/summary.json"
+    },
+    {
+      "run_id": "joint_1521m_resume360_final",
+      "label": "1.52B resume @360M samples",
+      "eval_summary": "samples/samples/world_model_eval_joint_1521m_resume360_final_preview_ddim20_20260226/summary.json"
+    }
+  ]
+}

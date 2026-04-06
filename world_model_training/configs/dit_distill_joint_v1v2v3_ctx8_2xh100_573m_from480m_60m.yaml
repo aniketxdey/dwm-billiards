@@ -1,0 +1,78 @@
+run:
+  id_prefix: dit_distill_joint_v1v2v3_ctx8_2xh100_573m_from480m_60m
+  seed: 77
+  output_root: ./world_model_training/runs
+  source_latent_s3_root: s3://videogen-pool-v2-237586137680/latents_v1 + v2 + v3
+  source_latent_local_root: /home/ubuntu/neural-pool (joint via manifests)
+  target_samples: 60000000
+  checkpoint_every_samples: 6000000
+  log_every_steps: 100
+  eval_every_steps: 4000
+  save_optimizer_state: true
+
+data:
+  shards_dir: /home/ubuntu/neural-pool/latents_v3/latents_v3collision_20260223_094313_watch01/shards
+  train_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/train_shards.txt
+  val_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/val_shards.txt
+  context_len: 8
+  val_shards: 0
+  batch_size: 256
+  drop_last: true
+  num_workers: 12
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+  shuffle_shards: true
+  shuffle_within_episode: true
+
+model:
+  latent_channels: 4
+  latent_h: 9
+  latent_w: 16
+  d_model: 1536
+  n_heads: 24
+  n_layers: 20
+  mlp_ratio: 4.0
+  dropout: 0.0
+  action_dim: 3
+
+diffusion:
+  timesteps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+
+distill:
+  teacher_checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume480m_20260301_080158_run01/checkpoints/ckpt_480000000.pt
+  teacher_config_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume480m_20260301_080158_run01/config/resolved_config.json
+  kd_weight: 0.7
+  gt_weight: 0.3
+
+optimizer:
+  lr: 0.00005
+  weight_decay: 0.0001
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+eval:
+  val_batches: 10
+
+wandb:
+  enabled: true
+  project: video_generation_project202
+  entity: ""
+  group: distill_joint_v1v2v3_573m_from480m_2xh100
+  tags:
+    [
+      "world-model",
+      "distill",
+      "student",
+      "teacher-480m",
+      "ctx8",
+      "joint-v1v2v3",
+      "573m",
+      "2xh100",
+      "60m",
+    ]

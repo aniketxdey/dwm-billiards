@@ -1,0 +1,8 @@
+{
+  "columns": [
+    "ground_truth",
+    "ctx8_baseline_2xh100_60m",
+    "ctx8_dfv0_2xh100_120m"
+  ],
+  "description": "Each video frame is horizontally concatenated as GT | model_1 | model_2 | ..."
+}

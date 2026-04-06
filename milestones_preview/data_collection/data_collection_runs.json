@@ -1,0 +1,26 @@
+[
+  {
+    "run_label":"v1_full_20260220_112101",
+    "episodes":100000,
+    "frames_per_episode":600,
+    "total_frames":60000000,
+    "shard_size_episodes":100,
+    "s3_prefix":"s3:\/\/videogen-pool-v2-237586137680\/dataraw_v2\/full_20260220_112101"
+  },
+  {
+    "run_label":"v2_diverse_20260222_154743",
+    "episodes":100000,
+    "frames_per_episode":600,
+    "total_frames":60000000,
+    "shard_size_episodes":100,
+    "s3_prefix":"s3:\/\/videogen-pool-v2-237586137680\/dataraw_v2\/full_v2diverse_20260222_154743"
+  },
+  {
+    "run_label":"v3_collision_20260223_094313",
+    "episodes":200000,
+    "frames_per_episode":600,
+    "total_frames":120000000,
+    "shard_size_episodes":100,
+    "s3_prefix":"s3:\/\/videogen-pool-v2-237586137680\/dataraw_v3\/full_v3collision_20260223_094313"
+  }
+]

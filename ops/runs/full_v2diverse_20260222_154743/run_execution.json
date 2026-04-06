@@ -1,0 +1,20 @@
+{
+  "run_id": "full_v2diverse_20260222_154743",
+  "ec2": {
+    "instance_type": "c7i.48xlarge",
+    "script_name": "remote_full_run.primary.sh",
+    "workers": 64,
+    "InstanceId": "i-0157fad8542f41df2",
+    "PrivateIp": "172.31.85.130",
+    "State": "pending",
+    "InstanceType": "c7i.48xlarge"
+  },
+  "ssm": {
+    "CommandId": "e735d971-9ebb-4e1f-bd4e-76db70c211e2",
+    "Status": "Pending",
+    "RequestedDateTime": "2026-02-22T10:51:11.676000-05:00"
+  },
+  "remote_script_s3": "s3://videogen-pool-v2-237586137680/ops/runs/full_v2diverse_20260222_154743/remote_full_run.primary.sh",
+  "region": "us-east-1",
+  "profile": "codex"
+}

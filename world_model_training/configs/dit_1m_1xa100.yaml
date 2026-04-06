@@ -1,0 +1,59 @@
+run:
+  id_prefix: dit_1m_1xa100
+  seed: 42
+  output_root: ./world_model_training/runs
+  source_latent_s3_root: s3://videogen-pool-v2-237586137680/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01
+  source_latent_local_root: /home/ubuntu/neural-pool/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01
+  target_samples: 1000000
+  checkpoint_every_samples: 100000
+  log_every_steps: 50
+  eval_every_steps: 250
+  save_optimizer_state: true
+
+data:
+  shards_dir: /home/ubuntu/neural-pool/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01/shards
+  context_len: 8
+  val_shards: 50
+  batch_size: 1024
+  drop_last: true
+  num_workers: 12
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+  shuffle_shards: true
+  shuffle_within_episode: true
+
+model:
+  latent_channels: 4
+  latent_h: 9
+  latent_w: 16
+  d_model: 768
+  n_heads: 12
+  n_layers: 10
+  mlp_ratio: 4.0
+  dropout: 0.0
+  action_dim: 3
+
+diffusion:
+  timesteps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+
+optimizer:
+  lr: 0.0002
+  weight_decay: 0.0001
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+eval:
+  val_batches: 16
+
+wandb:
+  enabled: true
+  project: video_generation_project202
+  entity: ""
+  group: dit_baseline
+  tags: ["world-model", "dit", "baseline", "1xa100", "1m"]

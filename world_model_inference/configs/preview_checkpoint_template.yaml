@@ -1,0 +1,43 @@
+run:
+  preview_id: ""
+  seed: 42
+  output_root: ./world_model_inference/runs
+  device: cuda
+  ddim_steps: 20
+  horizon: 32
+  video_fps: 12
+  decode_batch_size: 128
+  num_clips: 1
+
+model:
+  name: hero_1521m
+  checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_hero_20260224_030204_run01/checkpoints/ckpt_072000000.pt
+  train_config_path: world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_240m_hero.yaml
+
+data:
+  eval_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
+  sample_from: eval
+
+vae:
+  enabled: true
+  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_060000000.pt
+  base_channels: 64
+  latent_channels: 4
+
+actions:
+  source: dataset # dataset | preset
+  preset:
+    name: single_shot
+    horizon: 32
+    shot_frame: 0
+    force_x: 0.0
+    force_y: -8.0
+    seed: 42
+    num_shots: 2
+    max_force: 12.0
+    min_gap: 6
+
+viz:
+  write_video: true
+  write_action_timeline: true
+  include_gt_if_available: true

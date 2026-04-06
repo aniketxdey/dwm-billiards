@@ -1,0 +1,54 @@
+{
+  "preview_id": "ddim30_cmp",
+  "created_at": "2026-02-28 17:55:10 UTC",
+  "model": {
+    "name": "resume360_1521m",
+    "checkpoint_path": "/home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume360m_20260226_181315_run01/checkpoints/ckpt_360000000.pt",
+    "train_config_path": "/home/ubuntu/maat/world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_360m_resume_lr25e5.yaml",
+    "context_len": 8
+  },
+  "source": "dataset",
+  "num_clips": 1,
+  "horizon": 64,
+  "ddim_steps": 30,
+  "rollout_seconds": 14.811846256256104,
+  "device": "cuda",
+  "clip_meta": [
+    {
+      "shard": "/home/ubuntu/neural-pool/latents_v3/latents_v3collision_20260223_094313_watch01/shards/latent_shard_01905.npz",
+      "episode": 77,
+      "anchor_t": 353,
+      "episode_length": 600
+    }
+  ],
+  "metrics": {
+    "latent_mse": {
+      "1": 0.025237342342734337,
+      "4": 0.11401530355215073,
+      "8": 0.2699830234050751,
+      "16": 0.47574296593666077,
+      "32": 0.8299050331115723
+    },
+    "latent_mae": {
+      "1": 0.07988910377025604,
+      "4": 0.15807604789733887,
+      "8": 0.2406204491853714,
+      "16": 0.33275511860847473,
+      "32": 0.42940860986709595
+    },
+    "frame_psnr": {
+      "1": 28.58973277491371,
+      "4": 23.78723901930469,
+      "8": 21.2949827751752,
+      "16": 19.655113167023007,
+      "32": 17.71071468458675
+    },
+    "frame_l1": {
+      "1": 0.005805863067507744,
+      "4": 0.012190618552267551,
+      "8": 0.017723510041832924,
+      "16": 0.023493735119700432,
+      "32": 0.03431139513850212
+    }
+  }
+}

@@ -1,0 +1,4 @@
+run_label,episodes,frames_per_episode,total_frames,shard_size_episodes,s3_prefix
+v1_full_20260220_112101,100000,600,60000000,100,s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101
+v2_diverse_20260222_154743,100000,600,60000000,100,s3://videogen-pool-v2-237586137680/dataraw_v2/full_v2diverse_20260222_154743
+v3_collision_20260223_094313,200000,600,120000000,100,s3://videogen-pool-v2-237586137680/dataraw_v3/full_v3collision_20260223_094313

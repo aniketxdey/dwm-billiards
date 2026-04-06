@@ -1,0 +1,43 @@
+run:
+  preview_id: ""
+  seed: 42
+  output_root: ./world_model_inference/runs
+  device: cuda
+  ddim_steps: 30
+  horizon: 96
+  video_fps: 12
+  decode_batch_size: 128
+  num_clips: 1
+
+model:
+  name: resume360_1521m
+  checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume360m_20260226_181315_run01/checkpoints/ckpt_360000000.pt
+  train_config_path: /home/ubuntu/maat/world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_360m_resume_lr25e5.yaml
+
+data:
+  eval_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
+  sample_from: eval
+
+vae:
+  enabled: true
+  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_060000000.pt
+  base_channels: 64
+  latent_channels: 4
+
+actions:
+  source: preset # dataset | preset
+  preset:
+    name: single_shot
+    horizon: 96
+    shot_frame: 6
+    force_x: 3.5
+    force_y: -8.5
+    seed: 42
+    num_shots: 2
+    max_force: 12.0
+    min_gap: 6
+
+viz:
+  write_video: true
+  write_action_timeline: true
+  include_gt_if_available: false

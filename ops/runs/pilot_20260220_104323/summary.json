@@ -1,0 +1,16 @@
+{
+  "run_id": "pilot_20260220_104323",
+  "start_utc": "2026-02-20T10:49:27Z",
+  "end_utc": "2026-02-20T10:51:53Z",
+  "duration_sec": 146,
+  "generator_exit_code": 0,
+  "episodes": 1000,
+  "shard_size": 100,
+  "frames": 600,
+  "workers": 48,
+  "seed": 42,
+  "s3_data_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v2/pilot_20260220_104323",
+  "s3_log_prefix": "s3://videogen-pool-v2-237586137680/ops/runs/pilot_20260220_104323",
+  "shards_uploaded": 10,
+  "shard_bytes": 355581698
+}

@@ -1,0 +1,28 @@
+run:
+  export_id: latents_60m_from_vae_60m_20260220_204310_run01
+  seed: 42
+  output_root: /home/ubuntu/neural-pool/latents_v1
+  source_dataset_s3_root: s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101
+  source_dataset_local_root: /home/ubuntu/neural-pool/full_20260220_112101
+  source_shards_dir: /home/ubuntu/neural-pool/full_20260220_112101/raw/shards
+  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  skip_existing: true
+  max_shards: 0
+  log_every_shards: 10
+
+data:
+  batch_size: 1024
+  include_actions: true
+  include_sim_state: true
+  include_lengths: true
+  include_episode_meta: false
+
+model:
+  base_channels: 64
+  latent_channels: 4
+
+export:
+  deterministic_latent: true
+  output_dtype: float16
+  mixed_precision: bf16
+  compress: false

@@ -1,0 +1,29 @@
+run:
+  eval_id: rollout_eval_ctx8_vs_ctx12_60m
+  seed: 42
+  output_root: ./world_model_training/evals
+  device: cuda
+  num_clips: 64
+  num_viz_clips: 6
+  horizons: [1, 4, 8, 16, 32]
+  ddim_steps: 10
+  decode_batch_size: 128
+  video_fps: 12
+
+data:
+  shards_dir: /home/ubuntu/neural-pool/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01/shards
+  val_shards: 50
+
+models:
+  - name: ctx8_60m
+    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_1xa100_20260221_185520_resume5m/checkpoints/ckpt_060000000.pt
+    config_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_1xa100_20260221_185520_resume5m/config/resolved_config.json
+  - name: ctx12_60m
+    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_ctx12_1xa100_20260221_192300_run01/checkpoints/ckpt_060000000.pt
+    config_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_ctx12_1xa100_20260221_192300_run01/config/resolved_config.json
+
+vae:
+  enabled: true
+  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  base_channels: 64
+  latent_channels: 4

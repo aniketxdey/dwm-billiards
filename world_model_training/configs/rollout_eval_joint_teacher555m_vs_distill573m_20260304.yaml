@@ -1,0 +1,30 @@
+run:
+  eval_id: rollout_eval_joint_teacher555m_vs_distill573m_20260304
+  seed: 42
+  output_root: ./world_model_training/evals
+  device: cuda
+  num_clips: 32
+  num_viz_clips: 6
+  horizons: [1, 4, 8, 16, 32]
+  ddim_steps: 10
+  decode_batch_size: 128
+  video_fps: 12
+
+data:
+  # Use the held-out eval manifest from the joint v1/v2/v3 dataset lineage.
+  eval_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/val_shards.txt
+  val_shards: 0
+
+models:
+  - name: teacher_1521m_ckpt555m
+    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/checkpoints/ckpt_555000000.pt
+    config_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/config/resolved_config.json
+  - name: student_573m_distill_30m
+    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_distill_joint_v1v2v3_ctx8_2xh100_573m_from555m_30m_fix_resume_20260304_033401_run01/checkpoints/ckpt_030000000.pt
+    config_path: /home/ubuntu/maat/world_model_training/runs/dit_distill_joint_v1v2v3_ctx8_2xh100_573m_from555m_30m_fix_resume_20260304_033401_run01/config/resolved_config.json
+
+vae:
+  enabled: true
+  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  base_channels: 64
+  latent_channels: 4

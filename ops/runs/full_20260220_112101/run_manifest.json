@@ -1,0 +1,29 @@
+{
+  "run_id": "full_20260220_112101",
+  "purpose": "full v2 dataset generation",
+  "dataset": {
+    "episodes": 100000,
+    "frames_per_episode": 600,
+    "shard_size": 100,
+    "workers": 32,
+    "seed": 42
+  },
+  "aws": {
+    "region": "us-east-1",
+    "account_id": "237586137680",
+    "instance_id": "i-010b1d74113e693d5",
+    "instance_type": "c7i.24xlarge",
+    "instance_profile": "NeuralPoolEc2RunnerProfile",
+    "subnet_id": "subnet-0540d17208e07bb0f",
+    "security_group_id": "sg-0cd6b54e100af5aad"
+  },
+  "paths": {
+    "dataset_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101",
+    "log_prefix": "s3://videogen-pool-v2-237586137680/ops/runs/full_20260220_112101",
+    "artifact_uri": "s3://videogen-pool-v2-237586137680/ops/artifacts/full_20260220_112101/data_generation_package.tar.gz"
+  },
+  "code_ref": {
+    "git_head": "unknown",
+    "source_dir": "/Users/moin/maat/data_generation_package"
+  }
+}

@@ -1,0 +1,58 @@
+run:
+  id_prefix: vae_60m_1xa100
+  seed: 42
+  output_root: ./VAE training/runs
+  dataset_s3_root: s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101
+  dataset_local_root: /home/ubuntu/neural-pool/full_20260220_112101
+  target_frames: 60000000
+  milestone_frames:
+    - 1000000
+    - 5000000
+    - 10000000
+    - 30000000
+  checkpoint_every_frames: 1000000
+  preview_every_frames: 1000000
+  log_every_steps: 100
+  save_optimizer_state: true
+
+data:
+  source: shards
+  shards_dir: /home/ubuntu/neural-pool/full_20260220_112101/raw/shards
+  shuffle_shards: true
+  shuffle_frames_within_shard: true
+  batch_size: 512
+  drop_last: true
+  num_workers: 12
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+
+model:
+  base_channels: 64
+  latent_channels: 4
+
+loss:
+  recon_l1_weight: 1.0
+  lpips_weight: 0.1
+  kl_weight: 1.0
+  kl_beta_start: 0.000001
+  kl_beta_end: 0.0005
+  kl_warmup_frames: 300000
+
+optimizer:
+  lr: 0.0002
+  weight_decay: 0.0001
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+preview:
+  fixed_preview_images: 16
+  fixed_preview_video_frames: 64
+
+wandb:
+  enabled: true
+  project: video_generation_project202
+  entity: ""

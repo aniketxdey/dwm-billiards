@@ -1,0 +1,29 @@
+{
+  "run_id": "pilot_20260220_104323",
+  "purpose": "pilot validation for v2 clean regeneration pipeline",
+  "dataset": {
+    "episodes": 1000,
+    "frames_per_episode": 600,
+    "shard_size": 100,
+    "workers": 48,
+    "seed": 42
+  },
+  "aws": {
+    "region": "us-east-1",
+    "account_id": "237586137680",
+    "instance_type": "c7i.24xlarge",
+    "ami_id": "ami-0f3caa1cf4417e51b",
+    "subnet_id": "subnet-0540d17208e07bb0f",
+    "security_group_id": "sg-0cd6b54e100af5aad",
+    "instance_profile": "NeuralPoolEc2RunnerProfile"
+  },
+  "paths": {
+    "dataset_prefix": "s3://videogen-pool-v2-237586137680/dataraw_v2/pilot_20260220_104323",
+    "log_prefix": "s3://videogen-pool-v2-237586137680/ops/runs/pilot_20260220_104323",
+    "artifact_prefix": "s3://videogen-pool-v2-237586137680/ops/artifacts/pilot_20260220_104323"
+  },
+  "code_ref": {
+    "git_head": "HEAD",
+    "source_dir": "/Users/moin/maat/data_generation_package"
+  }
+}

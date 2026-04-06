@@ -1,0 +1,36 @@
+{
+  "run_id": "pilot_20260220_104323",
+  "instance": {
+    "instance_id": "i-010b1d74113e693d5",
+    "instance_type": "c7i.24xlarge",
+    "az": "us-east-1b",
+    "state_after_run": "stopped"
+  },
+  "commands": [
+    {
+      "command_id": "2a615d87-cb4d-443d-a8f7-5aa57ad91b25",
+      "status": "Failed",
+      "reason": "tar xattr compatibility issue"
+    },
+    {
+      "command_id": "15a18632-9157-4f23-be98-1abb250e7f19",
+      "status": "Failed",
+      "reason": "pre-fix run; superseded by debug command"
+    },
+    {
+      "command_id": "1b039d3f-ce58-48cf-9a49-1a514ede8a28",
+      "status": "Failed",
+      "reason": "debug trace: pip/system env issue"
+    },
+    {
+      "command_id": "378d0f7b-18d2-4d1b-b80f-7334ecae9604",
+      "status": "Failed",
+      "reason": "opencv dynamic library dependency (libxcb.so.1)"
+    },
+    {
+      "command_id": "942bf66b-b2cd-44e2-a250-452c2e6fe965",
+      "status": "Success",
+      "reason": "final pilot execution"
+    }
+  ]
+}
