@@ -2,7 +2,7 @@
 
 A diffusion-based world model to predicts future frames of a 2D billiards game from actions alone, with accurate physics. COmplete with playable simulator.
 
-https://github.com/user-attachments/assets/f10ec87d-ae13-4e87-a8cb-d7a821f4ac3a
+[Results](https://github.com/user-attachments/assets/f10ec87d-ae13-4e87-a8cb-d7a821f4ac3a)
 
 
 ## Methodology
