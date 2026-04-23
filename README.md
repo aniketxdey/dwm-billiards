@@ -1,6 +1,6 @@
 # Billiards Physics Diffusion World Model
 
-Diffusion-based world model that predicts future frames of a 2D billiards game from actions alone, with accurate physics. The system trains a **convolutional VAE** to compress frames into a spatial latent space, then trains an **action-conditioned Diffusion Transformer (DiT)** to autoregressively generate future latents given context frames and player actions. Inference runs in real time via DDIM sampling with optional interactive play through a browser UI.
+A diffusion-based world model to predicts future frames of a 2D billiards game from actions alone, with accurate physics. COmplete with playable simulator.
 
 https://github.com/user-attachments/assets/1c44df17-dda8-4185-af50-38ea8b0315d0
 
