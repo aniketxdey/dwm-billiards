@@ -1,6 +1,6 @@
 # Diffusion World Modelling for Billiards Physics
 
-A diffusion-based world model to predicts future frames of a 2D billiards game in real-time with accurate physics. Complete with playable simulator.
+A world model utilizing diffusion forcing & autoregressive DDIM rollouts in latent space to predict future frames of a 2D billiards game in real-time with accurate physics.
 
 https://github.com/user-attachments/assets/7fb60037-203e-499e-9533-c7397b9cf1ee
 
