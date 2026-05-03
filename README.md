@@ -4,6 +4,17 @@ A diffusion-based world model to predicts future frames of a 2D billiards game f
 
 https://github.com/user-attachments/assets/7fb60037-203e-499e-9533-c7397b9cf1ee
 
+## Abstract (working)
+
+This project studies whether diffusion transformers can preserve physics in an interactive,
+action-conditioned billiards simulator, and whether diffusion forcing improves long-horizon roll-outs.
+We build a full pipeline: simulation data, VAE latent compression, DiT world-model training,
+rollout evaluation, and interactive inference tools. The core question is whether multi-step
+diffusion forcing preserves game logic better than single-step diffusion training. Across multiple
+runs and model scales, diffusion forcing strongly improves long-horizon stability. Remaining
+failure modes are mostly identity consistency (color drift and occasional object swallowing),
+which motivates targeted follow-up losses.
+
 
 ## Methodology
 
