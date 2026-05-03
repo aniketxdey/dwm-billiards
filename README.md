@@ -18,6 +18,8 @@ which motivates targeted follow-up losses.
 
 ## Methodology
 
+<img width="1434" height="542" alt="pipeline" src="https://github.com/user-attachments/assets/216e570d-925a-4891-a053-b5b54fcae488" />
+
 ### 1) Data generation
 
 - Pymunk-based 2D physics simulator renders billiards episodes at 128×72 resolution, 30 FPS
