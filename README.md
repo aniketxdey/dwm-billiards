@@ -1,10 +1,10 @@
-# Billiards Physics Diffusion World Model
+# Diffusion World Modelling for Billiards Physics
 
-A diffusion-based world model to predicts future frames of a 2D billiards game from actions alone, with accurate physics. COmplete with playable simulator.
+A diffusion-based world model to predicts future frames of a 2D billiards game in real-time with accurate physics. Complete with playable simulator.
 
 https://github.com/user-attachments/assets/7fb60037-203e-499e-9533-c7397b9cf1ee
 
-## Abstract (working)
+## Abstract
 
 This project studies whether diffusion transformers can preserve physics in an interactive,
 action-conditioned billiards simulator, and whether diffusion forcing improves long-horizon roll-outs.
