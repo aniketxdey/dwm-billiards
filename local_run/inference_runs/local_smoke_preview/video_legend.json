@@ -1,0 +1,7 @@
+{
+  "columns": [
+    "ground_truth",
+    "dit_local_smoke"
+  ],
+  "description": "GT | model prediction"
+}

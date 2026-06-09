@@ -11,9 +11,9 @@ from typing import Any, Dict, List
 import numpy as np
 import torch
 import yaml
-from torchvision.io import write_video
 
 from vae_training.model import ConvVAE
+from world_model_training.video_io import write_video
 from world_model_training.data import resolve_eval_shards_from_data_cfg
 from world_model_training.diffusion import GaussianDiffusion
 from world_model_training.model import ActionConditionedDiT

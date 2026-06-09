@@ -1,0 +1,78 @@
+{
+  "run": {
+    "id_prefix": "dit_local_smoke",
+    "seed": 42,
+    "output_root": "./local_run/wm_runs",
+    "source_latent_s3_root": "",
+    "source_latent_local_root": "./local_run/latents/local_smoke/shards",
+    "target_samples": 4000,
+    "checkpoint_every_samples": 4000,
+    "log_every_steps": 10,
+    "eval_every_steps": 50,
+    "save_optimizer_state": false
+  },
+  "data": {
+    "shards_dir": "./local_run/latents/local_smoke/shards",
+    "shards_manifest": "",
+    "train_shards_manifest": "",
+    "val_shards_manifest": "",
+    "eval_shards_manifest": "",
+    "context_len": 4,
+    "val_shards": 1,
+    "batch_size": 64,
+    "drop_last": true,
+    "num_workers": 1,
+    "pin_memory": false,
+    "persistent_workers": false,
+    "prefetch_factor": 2,
+    "shuffle_shards": true,
+    "shuffle_within_episode": true
+  },
+  "model": {
+    "latent_channels": 4,
+    "latent_h": 9,
+    "latent_w": 16,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "mlp_ratio": 4.0,
+    "dropout": 0.0,
+    "action_dim": 3
+  },
+  "diffusion": {
+    "timesteps": 1000,
+    "beta_start": 0.0001,
+    "beta_end": 0.02
+  },
+  "diffusion_forcing": {
+    "enabled": false,
+    "rollout_steps": 2,
+    "teacher_forcing_prob_start": 1.0,
+    "teacher_forcing_prob_end": 0.25,
+    "teacher_forcing_decay_samples": 20000000,
+    "detach_predicted_context": true
+  },
+  "optimizer": {
+    "lr": 0.0002,
+    "weight_decay": 0.0001
+  },
+  "training": {
+    "mixed_precision": "fp32",
+    "max_grad_norm": 1.0,
+    "compile_model": false
+  },
+  "eval": {
+    "val_batches": 4
+  },
+  "wandb": {
+    "enabled": false,
+    "project": "video_generation_project202",
+    "entity": "",
+    "group": "dit_baseline",
+    "tags": [
+      "world-model",
+      "dit",
+      "baseline"
+    ]
+  }
+}

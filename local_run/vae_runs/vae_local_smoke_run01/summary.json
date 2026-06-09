@@ -1,0 +1,9 @@
+{
+  "run_id": "vae_local_smoke_run01",
+  "finished_at": "2026-06-09 17:10:22 UTC",
+  "processed_frames": 6000,
+  "final_step": 94,
+  "duration_sec": 36.95383620262146,
+  "avg_fps": 162.364739809459,
+  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt"
+}

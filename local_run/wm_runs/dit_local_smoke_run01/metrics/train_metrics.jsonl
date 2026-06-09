@@ -1,0 +1,7 @@
+{"step": 10, "processed_samples": 640, "samples_per_sec": 958.0438500566756, "train_loss": 1.1572948694229126, "val_loss": NaN, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 20, "processed_samples": 1280, "samples_per_sec": 1734.0108432419652, "train_loss": 1.0878266096115112, "val_loss": NaN, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 30, "processed_samples": 1920, "samples_per_sec": 2362.6207426661936, "train_loss": 1.0390084981918335, "val_loss": NaN, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 40, "processed_samples": 2560, "samples_per_sec": 2827.0231081772745, "train_loss": 1.0156015157699585, "val_loss": NaN, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 50, "processed_samples": 3200, "samples_per_sec": 488.0037932738472, "train_loss": 1.0098763704299927, "val_loss": 1.0152535736560822, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 60, "processed_samples": 3840, "samples_per_sec": 579.0121704836195, "train_loss": 1.0189815759658813, "val_loss": NaN, "event_checkpoint": false, "world_size": 1, "global_batch_size": 64}
+{"step": 63, "processed_samples": 4000, "samples_per_sec": 600.9070043822989, "train_loss": 1.0061297416687012, "val_loss": NaN, "event_checkpoint": true, "world_size": 1, "global_batch_size": 32}

@@ -1,0 +1,42 @@
+{
+  "source": "generated_episode",
+  "num_frames": 600,
+  "height": 72,
+  "width": 128,
+  "channels": 3,
+  "shots_from_actions": 15,
+  "shot_frames": [
+    24,
+    76,
+    104,
+    129,
+    151,
+    189,
+    215,
+    243,
+    296,
+    366,
+    393,
+    445,
+    505,
+    528,
+    583
+  ],
+  "active_balls_frame0": 10,
+  "meta": {
+    "episode_id": 0,
+    "num_frames": 600,
+    "shots_fired": 15,
+    "balls_pocketed": 0,
+    "balls_remaining": 10,
+    "bot_personality": {
+      "w_random": 0.034956525146528354,
+      "w_ball": 0.12648178469707572,
+      "w_pocket": 0.7903250653189051,
+      "w_bank": 0.031769139646447196,
+      "w_tap": 0.016467485191043595,
+      "speed_mult": 1.1690566739987762,
+      "accuracy": 0.026356911295997737
+    }
+  }
+}

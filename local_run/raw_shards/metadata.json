@@ -1,0 +1,61 @@
+{
+  "dataset_name": "Neural Pool Dataset",
+  "version": "1.0",
+  "created": "2026-06-09 17:09:00 UTC",
+  "total_episodes": 48,
+  "episodes_per_shard": 8,
+  "num_shards": 6,
+  "resolution": [
+    72,
+    128
+  ],
+  "fps": 30,
+  "frames_per_episode": 120,
+  "color_format": "RGB",
+  "physics": {
+    "gravity": 0,
+    "friction": 0.95,
+    "restitution": 0.9,
+    "damping": 0.98,
+    "ball_radius": 3,
+    "ball_mass": 1.0
+  },
+  "data_format": {
+    "frames": {
+      "shape": "[num_episodes, T, H, W, 3]",
+      "dtype": "uint8",
+      "description": "RGB frames of table (no cursor)"
+    },
+    "actions": {
+      "shape": "[num_episodes, T, 3]",
+      "dtype": "float32",
+      "columns": [
+        "force_x",
+        "force_y",
+        "trigger"
+      ],
+      "description": "Control signals. trigger=1.0 on shot frame."
+    },
+    "sim_state": {
+      "shape": "[num_episodes, T, N, 4]",
+      "dtype": "float32",
+      "columns": [
+        "pos_x",
+        "pos_y",
+        "vel_x",
+        "vel_y"
+      ],
+      "description": "Physics ground truth for all balls."
+    },
+    "lengths": {
+      "shape": "[num_episodes]",
+      "dtype": "int32",
+      "description": "Actual length of each episode (for padding)."
+    }
+  },
+  "max_balls": 16,
+  "ball_count_range": [
+    8,
+    12
+  ]
+}

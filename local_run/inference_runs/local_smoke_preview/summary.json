@@ -1,0 +1,52 @@
+{
+  "preview_id": "local_smoke_preview",
+  "created_at": "2026-06-09 17:11:53 UTC",
+  "model": {
+    "name": "dit_local_smoke",
+    "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt",
+    "train_config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_smoke.yaml",
+    "context_len": 4
+  },
+  "source": "dataset",
+  "num_clips": 2,
+  "horizon": 8,
+  "ddim_steps": 8,
+  "rollout_seconds": 0.034314870834350586,
+  "device": "cpu",
+  "clip_meta": [
+    {
+      "shard": "local_run/latents/local_smoke/shards/latent_shard_00005.npz",
+      "episode": 0,
+      "anchor_t": 87,
+      "episode_length": 120
+    },
+    {
+      "shard": "local_run/latents/local_smoke/shards/latent_shard_00005.npz",
+      "episode": 5,
+      "anchor_t": 50,
+      "episode_length": 120
+    }
+  ],
+  "metrics": {
+    "latent_mse": {
+      "1": 25018.513671875,
+      "4": 24739.65625,
+      "8": 29875.02734375
+    },
+    "latent_mae": {
+      "1": 125.85818481445312,
+      "4": 126.10218811035156,
+      "8": 138.73541259765625
+    },
+    "frame_psnr": {
+      "1": 8.643515919502597,
+      "4": 8.629787008475123,
+      "8": 8.6274415797655
+    },
+    "frame_l1": {
+      "1": 0.34399929642677307,
+      "4": 0.34462711215019226,
+      "8": 0.34477418661117554
+    }
+  }
+}

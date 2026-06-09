@@ -1,0 +1,21 @@
+{
+  "run_id": "dit_local_smoke_run01",
+  "training_mode": "dit_baseline",
+  "config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_smoke.yaml",
+  "resume_from": null,
+  "notes": null,
+  "device": "cpu",
+  "rank": 0,
+  "world_size": 1,
+  "source_latent_s3_root": "",
+  "source_latent_local_root": "./local_run/latents/local_smoke/shards",
+  "shards_dir": "./local_run/latents/local_smoke/shards",
+  "shards_manifest": "",
+  "train_shards_manifest": "",
+  "val_shards_manifest": "",
+  "train_shards": 5,
+  "val_shards": 1,
+  "df_enabled": false,
+  "df_rollout_steps": 0,
+  "started_at": "2026-06-09 17:10:46 UTC"
+}

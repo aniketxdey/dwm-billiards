@@ -13,9 +13,9 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 import torch
-from torchvision.io import write_video
 
 from world_model_training import eval_rollout as wm_eval
+from world_model_training.video_io import write_video
 from world_model_training.data import (
     resolve_eval_shards_from_data_cfg,
     resolve_train_val_shards_from_data_cfg,

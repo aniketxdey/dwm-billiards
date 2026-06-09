@@ -1,0 +1,11 @@
+{
+  "export_id": "local_smoke",
+  "finished_at": "2026-06-09 17:10:39 UTC",
+  "total_shards_seen": 6,
+  "total_shards_written": 6,
+  "total_frames_encoded": 5760,
+  "duration_sec": 5.52241587638855,
+  "avg_frames_per_sec": 1043.0217732473313,
+  "latent_mean": 0.3947230927994957,
+  "latent_std": 1.6953336837511108
+}
