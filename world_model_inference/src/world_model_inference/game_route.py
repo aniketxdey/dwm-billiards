@@ -19,7 +19,7 @@ from typing import Any, Dict, Tuple
 
 import numpy as np
 import torch
-from torchvision.io import write_video
+from world_model_training.video_io import write_video
 from PIL import Image, ImageDraw, ImageFont
 
 from .config import DEFAULT_PREVIEW_CONFIG
@@ -299,7 +299,7 @@ def _get_engine(train_config_path: str, checkpoint_path: str, vae_checkpoint_pat
             vae_cfg={
                 "enabled": True,
                 "checkpoint_path": vae_checkpoint_path,
-                "base_channels": 64,
+                "base_channels": int(os.environ.get("WM_INF_VAE_BASE_CHANNELS", "64")),
                 "latent_channels": 4,
             },
         )

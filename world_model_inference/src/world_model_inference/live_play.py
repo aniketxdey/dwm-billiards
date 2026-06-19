@@ -461,7 +461,7 @@ class LiveGameServer:
             vae_cfg={
                 "enabled": True,
                 "checkpoint_path": cfg["vae_checkpoint_path"],
-                "base_channels": 64,
+                "base_channels": int(os.environ.get("WM_INF_VAE_BASE_CHANNELS", "64")),
                 "latent_channels": 4,
             },
         )

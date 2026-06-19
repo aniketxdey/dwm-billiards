@@ -59,6 +59,24 @@ Configs: `vae_golf.yaml` (Phase 1 accuracy gate, LPIPS on), `latent_export_golf.
 `dit_golf.yaml` (baseline), `dit_golf_df.yaml` (Diffusion Forcing, resumes baseline),
 `preview_golf.yaml`. The smaller `*_smoke.yaml` configs are the CPU end-to-end test.
 
+## Live Play (Phase 4)
+Once the checkpoints exist, drive the model interactively (drag from the ball to
+aim/power a putt; the world model imagines the roll):
+
+```bash
+bash world_model_inference/scripts/run_live_play_golf.sh
+# then open http://127.0.0.1:7863
+```
+
+The launcher points the inference server at the golf DiT + VAE checkpoints and
+sets `WM_INF_VAE_BASE_CHANNELS=48` (golf's VAE is narrower than the pool model's
+64). Override any path inline, e.g. to preview before Diffusion Forcing finishes:
+
+```bash
+DIT_CKPT=./local_run_golf/wm_runs/dit_golf_base_run01/checkpoints/ckpt_080000000.pt \
+  bash world_model_inference/scripts/run_live_play_golf.sh
+```
+
 ## Shard Format
 Each shard (`.npz`) contains:
 - `frames`: `(N, T, 72, 128, 3)` `uint8`
