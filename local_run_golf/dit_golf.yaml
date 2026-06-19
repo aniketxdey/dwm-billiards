@@ -1,0 +1,55 @@
+# Scaled golf world model - BASELINE (single-step). Phase 2.
+run:
+  id_prefix: dit_golf_base
+  seed: 42
+  output_root: ./local_run_golf/wm_runs
+  source_latent_local_root: ./local_run_golf/latents/golf_main/shards
+  target_samples: 80000000
+  checkpoint_every_samples: 20000000
+  log_every_steps: 100
+  eval_every_steps: 1000
+  save_optimizer_state: true
+
+data:
+  shards_dir: ./local_run_golf/latents/golf_main/shards
+  context_len: 8
+  val_shards: 4
+  batch_size: 256
+  drop_last: true
+  num_workers: 8
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+  shuffle_shards: true
+  shuffle_within_episode: true
+
+model:
+  latent_channels: 4
+  latent_h: 9
+  latent_w: 16
+  d_model: 384
+  n_heads: 6
+  n_layers: 6
+  mlp_ratio: 4.0
+  dropout: 0.0
+  action_dim: 3
+
+diffusion:
+  timesteps: 1000
+  beta_start: 1.0e-4
+  beta_end: 2.0e-2
+
+optimizer:
+  lr: 2.0e-4
+  weight_decay: 1.0e-4
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+eval:
+  val_batches: 16
+
+wandb:
+  enabled: false

@@ -1,0 +1,54 @@
+# Scaled golf VAE config (single 4090 / A100). Phase 1: the accuracy GATE.
+# Goal: reconstructions must clearly render the ball + flag + bumpers.
+# LPIPS is enabled to preserve the small high-frequency ball detail.
+run:
+  id_prefix: vae_golf
+  seed: 42
+  output_root: ./local_run_golf/vae_runs
+  dataset_local_root: ./local_run_golf/raw_shards_main
+  target_frames: 4000000
+  milestone_frames: []
+  checkpoint_every_frames: 1000000
+  preview_every_frames: 250000
+  log_every_steps: 50
+  save_optimizer_state: false
+
+data:
+  source: shards
+  shards_dir: ./local_run_golf/raw_shards_main
+  shuffle_shards: true
+  shuffle_frames_within_shard: true
+  batch_size: 128
+  drop_last: true
+  num_workers: 8
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 4
+
+model:
+  base_channels: 48
+  latent_channels: 4
+
+loss:
+  recon_l1_weight: 1.0
+  lpips_weight: 0.1          # preserves the small white ball (needs `pip install lpips`)
+  kl_weight: 1.0
+  kl_beta_start: 1.0e-6
+  kl_beta_end: 1.0e-4        # lower KL -> latents keep more detail
+  kl_warmup_frames: 1000000
+
+optimizer:
+  lr: 2.0e-4
+  weight_decay: 1.0e-4
+
+training:
+  mixed_precision: bf16
+  max_grad_norm: 1.0
+  compile_model: false
+
+preview:
+  fixed_preview_images: 16
+  fixed_preview_video_frames: 64
+
+wandb:
+  enabled: false

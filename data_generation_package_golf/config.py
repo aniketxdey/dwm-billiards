@@ -26,13 +26,15 @@ RESTITUTION_MIN = 0.5
 RESTITUTION_MAX = 0.95
 
 # === Ball ===
-BALL_RADIUS = 3
-BALL_RADIUS_MIN = 3
-BALL_RADIUS_MAX = 3
+# radius 4 (not 3): a larger ball is far easier for the 8x-downsampling VAE to
+# reconstruct, which is the main accuracy gate for golf-like simulation.
+BALL_RADIUS = 4
+BALL_RADIUS_MIN = 4
+BALL_RADIUS_MAX = 4
 BALL_MASS = 1.0
 
 # === Hole / cup ===
-HOLE_RADIUS = 4
+HOLE_RADIUS = 5
 SINK_SPEED = 55.0       # ball is captured only if slow enough near the cup
 
 # === Course obstacles (static bumpers / "rocks") ===

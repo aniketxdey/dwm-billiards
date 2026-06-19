@@ -42,6 +42,23 @@ python generate_golf_shards.py \
 python run_sample_bundle.py --output-dir ./sample_bundle
 ```
 
+## Full Pipeline (scaled, single GPU)
+A turnkey driver runs data-gen -> VAE -> latent export -> DiT baseline ->
+Diffusion Forcing -> rollout preview using the configs in `local_run_golf/`:
+
+```bash
+# optional: better small-ball VAE detail
+pip install lpips
+# launch everything (sized for a single RTX 4090, ~$15-25 of GPU time)
+bash local_run_golf/run_golf_pipeline.sh
+# resume from a later stage (1=data .. 6=preview)
+START_STAGE=4 bash local_run_golf/run_golf_pipeline.sh
+```
+
+Configs: `vae_golf.yaml` (Phase 1 accuracy gate, LPIPS on), `latent_export_golf.yaml`,
+`dit_golf.yaml` (baseline), `dit_golf_df.yaml` (Diffusion Forcing, resumes baseline),
+`preview_golf.yaml`. The smaller `*_smoke.yaml` configs are the CPU end-to-end test.
+
 ## Shard Format
 Each shard (`.npz`) contains:
 - `frames`: `(N, T, 72, 128, 3)` `uint8`

@@ -211,6 +211,8 @@ class GolfBot:
     def __init__(self, world):
         self.world = world
         self.cooldown = random.uniform(0.2, 0.5)
+        self.settle = 0.0                      # time the ball has been at rest
+        self.dwell = random.uniform(0.15, 0.35)  # required rest time before a putt
         self.did_shoot = False
         self.shot_force = (0.0, 0.0)
         self._randomize_personality()
@@ -243,13 +245,22 @@ class GolfBot:
         if self.world.ball is None:
             return
 
+        # Track how long the ball has been (nearly) at rest so we putt from a
+        # clean stationary frame -> sharper action-conditioning signal.
+        if self.world.ball_speed() < 2.0:
+            self.settle += dt
+        else:
+            self.settle = 0.0
+
         self.cooldown -= dt
-        if self.world.ball_speed() < 3.0 and self.cooldown <= 0:
+        if self.settle >= self.dwell and self.cooldown <= 0:
             fx, fy = self._aim()
             self.world.putt((fx, fy))
             self.did_shoot = True
             self.shot_force = (fx, fy)
-            self.cooldown = random.uniform(0.5, 1.3)
+            self.cooldown = random.uniform(0.4, 1.0)
+            self.dwell = random.uniform(0.15, 0.35)
+            self.settle = 0.0
 
 
 def main():
