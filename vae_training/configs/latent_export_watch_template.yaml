@@ -5,7 +5,7 @@ run:
   source_dataset_s3_root: s3://videogen-pool-v2-237586137680/dataraw_v2/full_v2diverse_20260222_154743
   source_dataset_local_root: /home/ubuntu/neural-pool/full_v2diverse_20260222_154743
   source_shards_dir: /home/ubuntu/neural-pool/full_v2diverse_20260222_154743/raw/shards
-  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  checkpoint_path: /home/ubuntu/maat/vae_training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
   skip_existing: true
   max_shards: 0
   log_every_shards: 10

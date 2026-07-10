@@ -1,7 +1,7 @@
 # Neural Golf - Minimal Data Generation
 
 Top-down 2D mini-golf data generator. It is a drop-in sibling of
-`data_generation_package/` (billiards): same resolution, same `.npz` shard
+`rl_data_gen/` (billiards): same resolution, same `.npz` shard
 schema, and the same 3-dim action vector, so the existing VAE / world-model /
 inference pipeline consumes it **without any changes**.
 
@@ -44,15 +44,15 @@ python run_sample_bundle.py --output-dir ./sample_bundle
 
 ## Full Pipeline (scaled, single GPU)
 A turnkey driver runs data-gen -> VAE -> latent export -> DiT baseline ->
-Diffusion Forcing -> rollout preview using the configs in `local_run_golf/`:
+Diffusion Forcing -> rollout preview using the configs in `golf/local_run/`:
 
 ```bash
 # optional: better small-ball VAE detail
 pip install lpips
 # launch everything (sized for a single RTX 4090, ~$15-25 of GPU time)
-bash local_run_golf/run_golf_pipeline.sh
+bash golf/local_run/run_golf_pipeline.sh
 # resume from a later stage (1=data .. 6=preview)
-START_STAGE=4 bash local_run_golf/run_golf_pipeline.sh
+START_STAGE=4 bash golf/local_run/run_golf_pipeline.sh
 ```
 
 Configs: `vae_golf.yaml` (Phase 1 accuracy gate, LPIPS on), `latent_export_golf.yaml`,
@@ -64,7 +64,7 @@ Once the checkpoints exist, drive the model interactively (drag from the ball to
 aim/power a putt; the world model imagines the roll):
 
 ```bash
-bash world_model_inference/scripts/run_live_play_golf.sh
+bash world_model/inference/scripts/run_live_play_golf.sh
 # then open http://127.0.0.1:7863
 ```
 
@@ -73,8 +73,8 @@ sets `WM_INF_VAE_BASE_CHANNELS=48` (golf's VAE is narrower than the pool model's
 64). Override any path inline, e.g. to preview before Diffusion Forcing finishes:
 
 ```bash
-DIT_CKPT=./local_run_golf/wm_runs/dit_golf_base_run01/checkpoints/ckpt_080000000.pt \
-  bash world_model_inference/scripts/run_live_play_golf.sh
+DIT_CKPT=./golf/local_run/wm_runs/dit_golf_base_run01/checkpoints/ckpt_080000000.pt \
+  bash world_model/inference/scripts/run_live_play_golf.sh
 ```
 
 ## Shard Format

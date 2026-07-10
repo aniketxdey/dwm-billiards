@@ -1,7 +1,7 @@
 run:
   id_prefix: vae_60m_1xa100
   seed: 42
-  output_root: ./VAE training/runs
+  output_root: ./vae_training/runs
   dataset_s3_root: s3://videogen-pool-v2-237586137680/dataraw_v2/full_20260220_112101
   dataset_local_root: /home/ubuntu/neural-pool/full_20260220_112101
   target_frames: 60000000

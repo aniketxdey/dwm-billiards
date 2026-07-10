@@ -22,9 +22,9 @@ rsync -az --delete \
   --exclude '.git/' \
   --exclude '__pycache__/' \
   --exclude '*.pyc' \
-  --exclude 'VAE training/runs/' \
-  --exclude 'world_model_training/runs/' \
-  --exclude 'world_model_training/launcher_logs/' \
+  --exclude 'vae_training/runs/' \
+  --exclude 'world_model/training/runs/' \
+  --exclude 'world_model/training/launcher_logs/' \
   --exclude 'wandb/' \
   -e "ssh -i ${SSH_KEY_PATH} -p ${REMOTE_PORT} -o StrictHostKeyChecking=accept-new" \
   "${ROOT_DIR}/" \

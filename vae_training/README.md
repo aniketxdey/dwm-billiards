@@ -12,14 +12,10 @@ Train a custom VAE on the full `60,000,000` frame dataset:
 - Preview renders: every `1,000,000` frames
 
 ## Folder layout
-- `docs/`: plan, status/history, runbook, S3 contract
 - `configs/`: training configs (starting with 1x A100 profile)
 - `scripts/`: operational scripts (stage data, build frame cache, run training)
 - `src/vae_training/`: implementation code
 - `runs/`: local run outputs (checkpoints, previews, metrics)
-
-## What is already done
-See `docs/00_status_and_history.md` for exact dataset generation history and sizes.
 
 ## Quick start (when GPU instance is ready)
 1. Stage dataset shards from S3 to local SSD.
@@ -28,19 +24,19 @@ See `docs/00_status_and_history.md` for exact dataset generation history and siz
 Commands:
 
 ```bash
-RUN_ID="$(bash "VAE training/scripts/new_run_id.sh" run01)"
-bash "VAE training/scripts/sync_repo_to_lambda.sh"
-bash "VAE training/scripts/stage_shards_from_s3.sh"
-RUN_ID="$RUN_ID" bash "VAE training/scripts/preflight_60m_1xa100.sh"
-RUN_ID="$RUN_ID" RUN_NOTES="full_60m_streaming" bash "VAE training/scripts/run_train_60m_1xa100.sh"
+RUN_ID="$(bash vae_training/scripts/new_run_id.sh run01)"
+bash vae_training/scripts/sync_repo_to_lambda.sh
+bash vae_training/scripts/stage_shards_from_s3.sh
+RUN_ID="$RUN_ID" bash vae_training/scripts/preflight_60m_1xa100.sh
+RUN_ID="$RUN_ID" RUN_NOTES="full_60m_streaming" bash vae_training/scripts/run_train_60m_1xa100.sh
 ```
 
 ## Post-VAE latent export
 After selecting/finalizing a VAE checkpoint, export latents for world-model training:
 
 ```bash
-bash "VAE training/scripts/export_latents_60m.sh"
-AWS_PROFILE=codex-admin-web bash "VAE training/scripts/sync_latents_to_s3.sh" "latents_60m_from_vae_60m_20260220_204310_run01"
+bash vae_training/scripts/export_latents_60m.sh
+AWS_PROFILE=codex-admin-web bash vae_training/scripts/sync_latents_to_s3.sh "latents_60m_from_vae_60m_20260220_204310_run01"
 ```
 
 ## Streaming latent export (overlap with data generation)
@@ -53,8 +49,8 @@ This overlaps CPU data generation and GPU VAE encoding.
 
 Watcher command:
 ```bash
-CONFIG_PATH="VAE training/configs/latent_export_watch_template.yaml" \
-bash "VAE training/scripts/export_latents_watch.sh"
+CONFIG_PATH="vae_training/configs/latent_export_watch_template.yaml" \
+bash vae_training/scripts/export_latents_watch.sh
 ```
 
 Notes:
@@ -65,8 +61,8 @@ Notes:
 ## Quick Latent/Recon Comparison Utility
 Build a side-by-side panel video (`raw | recon | latent-vis`) for spot checks:
 ```bash
-PYTHONPATH="VAE training/src" python3 "VAE training/scripts/make_latent_comparison.py" \
-  --checkpoint "/home/ubuntu/maat/VAE training/runs/<vae_run>/checkpoints/ckpt_60000000.pt" \
+PYTHONPATH=vae_training/src python3 vae_training/scripts/make_latent_comparison.py \
+  --checkpoint "/home/ubuntu/maat/vae_training/runs/<vae_run>/checkpoints/ckpt_60000000.pt" \
   --raw-shard "/home/ubuntu/neural-pool/full_20260220_112101/raw/shards/shard_00000.npz" \
   --latent-shard "/home/ubuntu/neural-pool/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01/shards/shard_00000.npz" \
   --episode-index 0 \

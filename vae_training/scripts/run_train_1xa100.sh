@@ -12,7 +12,7 @@ export PYTHONPATH="${ROOT_DIR}/src:${PYTHONPATH:-}"
 if [[ -z "${RUN_ID}" ]]; then
   echo "Missing RUN_ID."
   echo "Example:"
-  echo "  RUN_ID=vae_1m_a100_run01 bash \"VAE training/scripts/run_train_1xa100.sh\""
+  echo "  RUN_ID=vae_1m_a100_run01 bash vae_training/scripts/run_train_1xa100.sh"
   exit 1
 fi
 

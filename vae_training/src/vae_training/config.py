@@ -11,7 +11,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "run": {
         "id_prefix": "vae",
         "seed": 42,
-        "output_root": "./VAE training/runs",
+        "output_root": "./vae_training/runs",
         "dataset_s3_root": "",
         "dataset_local_root": "",
         "target_frames": 1_000_000,
