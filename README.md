@@ -48,14 +48,17 @@ Autoregressive DDIM rollouts in latent space, decoded back to pixels by the VAE.
 ## Repository Structure
 
 ```
-data_generation_package/       # v1 data generator (pymunk simulation + shard export)
-data_generation_package_v2/    # v2: diverse physics, spawn layouts, bot archetypes
-data_generation_package_v3/    # v3: collision-heavy biasing, breaker bots
-VAE training/                  # ConvVAE model, training loop, latent export pipeline
-world_model_training/          # DiT model, diffusion, DF training, distillation, rollout eval
-world_model_inference/         # Inference pipeline, Gradio UI, FastAPI live play
-docs/                          # Project docs, LaTeX essay, Beamer slides
-milestones_preview/            # Curated metrics, eval summaries, media references
+rl_data_gen/                   # Billiards data generator (pymunk simulation + shard export,
+                               # v3: collision-heavy biasing, breaker bots)
+golf/
+  rl_data_gen/                 # Mini-golf variant of the data generator
+  local_run/                   # Local end-to-end golf pipeline (configs + run artifacts)
+vae_training/                  # ConvVAE model, training loop, latent export pipeline
+world_model/
+  training/                    # DiT model, diffusion, DF training, distillation, rollout eval
+  inference/                   # Inference pipeline, Gradio UI, FastAPI live play
+  local_run/                   # Local smoke-run artifacts (shards, latents, checkpoints)
+milestones/                    # Curated metrics, eval summaries, media references
 ops/                           # AWS run manifests, remote execution scripts
 scripts/                       # Workspace setup utilities
 ```
@@ -74,35 +77,35 @@ bash scripts/lambda_prepare_env.sh
 **2. Stage data from S3**
 
 ```bash
-bash "VAE training/scripts/stage_shards_from_s3.sh"
+bash vae_training/scripts/stage_shards_from_s3.sh
 ```
 
 **3. Train VAE**
 
 ```bash
-RUN_ID="$(RUN_PREFIX=vae_60m_1xa100 bash "VAE training/scripts/new_run_id.sh" run01)"
-RUN_ID="$RUN_ID" bash "VAE training/scripts/run_train_60m_1xa100.sh"
+RUN_ID="$(RUN_PREFIX=vae_60m_1xa100 bash vae_training/scripts/new_run_id.sh run01)"
+RUN_ID="$RUN_ID" bash vae_training/scripts/run_train_60m_1xa100.sh
 ```
 
 **4. Export latents**
 
 ```bash
-bash "VAE training/scripts/export_latents_60m.sh"
+bash vae_training/scripts/export_latents_60m.sh
 ```
 
 **5. Train world model**
 
 ```bash
-RUN_ID="$(RUN_PREFIX=dit_5m_1xa100 bash world_model_training/scripts/new_run_id.sh run01)"
-RUN_ID="$RUN_ID" bash world_model_training/scripts/run_train_1xa100.sh
+RUN_ID="$(RUN_PREFIX=dit_5m_1xa100 bash world_model/training/scripts/new_run_id.sh run01)"
+RUN_ID="$RUN_ID" bash world_model/training/scripts/run_train_1xa100.sh
 ```
 
 **6. Run inference**
 
 ```bash
-bash world_model_inference/scripts/run_preview.sh       # CLI preview
-bash world_model_inference/scripts/run_ui.sh            # Gradio UI
-bash world_model_inference/scripts/run_live_play.sh     # Real-time WebSocket play
+bash world_model/inference/scripts/run_preview.sh       # CLI preview
+bash world_model/inference/scripts/run_ui.sh            # Gradio UI
+bash world_model/inference/scripts/run_live_play.sh     # Real-time WebSocket play
 ```
 
 ## Data
@@ -115,23 +118,23 @@ Raw datasets are stored on S3 (not in git):
 
 Shard format (`.npz`): `frames [N,T,72,128,3] uint8`, `actions [N,T,3] float32`, `sim_state [N,T,16,4] float32`, `lengths [N,] int32`, `episode_meta [N,] object`.
 
-See `docs/S3_ACCESS.md` for credentials and staging instructions.
+See `vae_training/README.md` and `world_model/training/docs/02_data_contract.md` for staging instructions and the data contract.
 
 ## Evaluation
 
-Rollout evaluation compares models via autoregressive DDIM generation over increasing horizons (1–256 frames). Metrics include **latent MSE/MAE** and **frame-level PSNR/L1** (after VAE decode). Side-by-side comparison videos are generated automatically. See `milestones_preview/` for curated metric snapshots and `docs/PROJECT_STATUS_2026-03-04.md` for the latest results summary.
+Rollout evaluation compares models via autoregressive DDIM generation over increasing horizons (1–256 frames). Metrics include **latent MSE/MAE** and **frame-level PSNR/L1** (after VAE decode). Side-by-side comparison videos are generated automatically. See `milestones/` for curated metric snapshots and `world_model/training/docs/00_status_and_plan.md` for the latest results summary.
 
 ## Documentation
 
-| Document                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- |
-| `docs/PROJECT_JOURNEY.md`                 | Chronological project narrative             |
-| `docs/PROJECT_STATUS_2026-03-04.md`       | Latest experiment status and next steps     |
-| `docs/WORLD_MODEL_DECISION_2026-02-21.md` | Baseline context-length ablation decision   |
-| `docs/pipeline_math_mini.tex`             | Tensor shapes, loss functions, and DDP math |
-| `docs/final_project_essay/`               | Full academic write-up                      |
-| `docs/final_project_slides/`              | Beamer presentation decks                   |
+| Document                                                | Description                                 |
+| ------------------------------------------------------- | ------------------------------------------- |
+| `world_model/training/docs/00_status_and_plan.md`     | Latest experiment status and next steps     |
+| `world_model/training/docs/01_runbook_1xa100.md`      | Single-GPU training runbook                 |
+| `world_model/training/docs/02_runbook_2xh100.md`      | Multi-GPU training runbook                  |
+| `world_model/training/docs/02_data_contract.md`       | Latent shard data contract                  |
+| `world_model/training/docs/03_hero_run_1521m_v1v2v3.md` | Hero run notes (1.5B frames, v1+v2+v3)    |
+| `milestones/README.md`                                | Curated results and media index             |
 
 ## Git Policy
 
-Do not commit secrets, raw dataset shards, or model checkpoints. All large artifacts live on S3 and are referenced by URI. See `docs/GITHUB_PUSH_CHECKLIST.md`.
+Do not commit secrets, raw dataset shards, or model checkpoints. All large artifacts live on S3 and are referenced by URI.
