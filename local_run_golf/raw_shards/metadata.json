@@ -1,0 +1,55 @@
+{
+  "dataset_name": "Neural Golf Dataset",
+  "version": "1.0",
+  "created": "2026-06-19 03:37:11 UTC",
+  "total_episodes": 48,
+  "episodes_per_shard": 8,
+  "num_shards": 6,
+  "resolution": [
+    72,
+    128
+  ],
+  "fps": 30,
+  "frames_per_episode": 120,
+  "color_format": "RGB",
+  "physics": {
+    "gravity": 0,
+    "friction": 0.9,
+    "restitution": 0.7,
+    "damping": 0.3,
+    "ball_radius": 4,
+    "ball_mass": 1.0,
+    "hole_radius": 5
+  },
+  "data_format": {
+    "frames": {
+      "shape": "[num_episodes, T, H, W, 3]",
+      "dtype": "uint8"
+    },
+    "actions": {
+      "shape": "[num_episodes, T, 3]",
+      "dtype": "float32",
+      "columns": [
+        "force_x",
+        "force_y",
+        "trigger"
+      ]
+    },
+    "sim_state": {
+      "shape": "[num_episodes, T, N, 4]",
+      "dtype": "float32",
+      "columns": [
+        "pos_x",
+        "pos_y",
+        "vel_x",
+        "vel_y"
+      ],
+      "slots": "0=ball, 1=hole, 2+=bumpers"
+    },
+    "lengths": {
+      "shape": "[num_episodes]",
+      "dtype": "int32"
+    }
+  },
+  "max_balls": 16
+}

@@ -1,0 +1,1 @@
+{"event": "run_started", "run_id": "vae_golf_smoke_run01", "config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/vae_smoke.yaml", "resume_from": null, "notes": null, "device": "cpu", "dataset_s3_root": "", "dataset_local_root": "./local_run_golf/raw_shards", "data_source": "shards", "milestone_frames": [], "started_at": "2026-06-19 03:21:32 UTC"}

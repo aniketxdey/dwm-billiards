@@ -1,0 +1,12 @@
+{
+  "run_id": "dit_golf_smoke_run01",
+  "training_mode": "dit_baseline",
+  "finished_at": "2026-06-19 03:26:07 UTC",
+  "processed_samples": 4000,
+  "processed_samples_this_run": 4000,
+  "final_step": 63,
+  "duration_sec": 14.515451908111572,
+  "avg_samples_per_sec": 275.5684098105624,
+  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
+  "world_size": 1
+}
