@@ -1,0 +1,35 @@
+# Golf rollout preview from the final Diffusion-Forcing checkpoint.
+run:
+  preview_id: golf_main_preview
+  seed: 42
+  output_root: ./local_run_golf/inference_runs
+  device: cuda
+  ddim_steps: 16
+  horizon: 32
+  video_fps: 12
+  decode_batch_size: 128
+  num_clips: 4
+
+model:
+  name: dit_golf_df
+  checkpoint_path: ./local_run_golf/wm_runs/dit_golf_df_run01/checkpoints/ckpt_120000000.pt
+  train_config_path: ./local_run_golf/dit_golf_df.yaml
+
+data:
+  shards_dir: ./local_run_golf/latents/golf_main/shards
+  val_shards: 4
+  sample_from: eval
+
+vae:
+  enabled: true
+  checkpoint_path: ./local_run_golf/vae_runs/vae_golf_run01/checkpoints/ckpt_4000000.pt
+  base_channels: 48
+  latent_channels: 4
+
+actions:
+  source: dataset
+
+viz:
+  write_video: true
+  write_action_timeline: true
+  include_gt_if_available: true

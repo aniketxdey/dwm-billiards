@@ -1,0 +1,52 @@
+{
+  "run": {
+    "preview_id": "golf_smoke_preview",
+    "seed": 42,
+    "output_root": "./local_run_golf/inference_runs",
+    "device": "cpu",
+    "ddim_steps": 8,
+    "horizon": 8,
+    "video_fps": 8,
+    "decode_batch_size": 64,
+    "num_clips": 2
+  },
+  "model": {
+    "name": "dit_golf_smoke",
+    "checkpoint_path": "./local_run_golf/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
+    "train_config_path": "./local_run_golf/wm_smoke.yaml"
+  },
+  "data": {
+    "shards_dir": "./local_run_golf/latents/golf_smoke/shards",
+    "shards_manifest": "",
+    "train_shards_manifest": "",
+    "val_shards_manifest": "",
+    "eval_shards_manifest": "",
+    "val_shards": 1,
+    "sample_from": "eval"
+  },
+  "vae": {
+    "enabled": true,
+    "checkpoint_path": "./local_run_golf/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt",
+    "base_channels": 16,
+    "latent_channels": 4
+  },
+  "actions": {
+    "source": "dataset",
+    "preset": {
+      "name": "single_shot",
+      "horizon": 32,
+      "shot_frame": 0,
+      "force_x": 0.0,
+      "force_y": -8.0,
+      "seed": 42,
+      "num_shots": 1,
+      "max_force": 12.0,
+      "min_gap": 6
+    }
+  },
+  "viz": {
+    "write_video": true,
+    "write_action_timeline": true,
+    "include_gt_if_available": true
+  }
+}

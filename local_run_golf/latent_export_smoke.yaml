@@ -1,0 +1,27 @@
+run:
+  export_id: golf_smoke
+  seed: 42
+  source_shards_dir: ./local_run_golf/raw_shards
+  output_root: ./local_run_golf/latents
+  checkpoint_path: ./local_run_golf/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt
+  source_dataset_local_root: ./local_run_golf/raw_shards
+  max_shards: 0
+  skip_existing: false
+  log_every_shards: 2
+
+data:
+  batch_size: 128
+  include_actions: true
+  include_sim_state: true
+  include_lengths: true
+  include_episode_meta: true
+
+model:
+  base_channels: 16
+  latent_channels: 4
+
+export:
+  deterministic_latent: true
+  compress: false
+  mixed_precision: fp32
+  output_dtype: float32

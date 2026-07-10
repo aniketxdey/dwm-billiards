@@ -1,0 +1,28 @@
+# Scaled golf latent export. base_channels MUST match vae_golf.yaml.
+run:
+  export_id: golf_main
+  seed: 42
+  source_shards_dir: ./local_run_golf/raw_shards_main
+  output_root: ./local_run_golf/latents
+  checkpoint_path: ./local_run_golf/vae_runs/vae_golf_run01/checkpoints/ckpt_4000000.pt
+  source_dataset_local_root: ./local_run_golf/raw_shards_main
+  max_shards: 0
+  skip_existing: true
+  log_every_shards: 10
+
+data:
+  batch_size: 256
+  include_actions: true
+  include_sim_state: true
+  include_lengths: true
+  include_episode_meta: true
+
+model:
+  base_channels: 48
+  latent_channels: 4
+
+export:
+  deterministic_latent: true
+  compress: false
+  mixed_precision: bf16
+  output_dtype: float16

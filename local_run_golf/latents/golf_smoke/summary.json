@@ -1,0 +1,11 @@
+{
+  "export_id": "golf_smoke",
+  "finished_at": "2026-06-19 03:25:39 UTC",
+  "total_shards_seen": 6,
+  "total_shards_written": 6,
+  "total_frames_encoded": 5760,
+  "duration_sec": 35.71599364280701,
+  "avg_frames_per_sec": 161.27228763688703,
+  "latent_mean": 0.24297266881785617,
+  "latent_std": 1.6744060920844013
+}

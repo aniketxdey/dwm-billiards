@@ -1,0 +1,32 @@
+{
+  "source": "generated_golf_episode",
+  "num_frames": 600,
+  "height": 72,
+  "width": 128,
+  "channels": 3,
+  "shots_from_actions": 10,
+  "shot_frames": [
+    13,
+    90,
+    156,
+    179,
+    242,
+    313,
+    387,
+    424,
+    491,
+    555
+  ],
+  "meta": {
+    "episode_id": 0,
+    "num_frames": 600,
+    "shots_fired": 10,
+    "cups_sunk": 2,
+    "num_bumpers": 3,
+    "bot_personality": {
+      "accuracy": 0.03564184805774079,
+      "power_mult": 0.9695303633131511,
+      "miss_prob": 0.19254965334901875
+    }
+  }
+}
