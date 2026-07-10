@@ -24,13 +24,11 @@ fi
 
 SYNC_DIRS=(
   "README.md"
-  "docs"
-  "data_generation_package"
-  "data_generation_package_v2"
-  "data_generation_package_v3"
-  "VAE training"
-  "world_model_training"
-  "world_model_inference"
+  "rl_data_gen"
+  "golf"
+  "vae_training"
+  "world_model"
+  "milestones"
   "samples"
   "ops/runs"
 )

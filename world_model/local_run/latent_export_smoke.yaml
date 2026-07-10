@@ -1,10 +1,10 @@
 run:
   export_id: local_smoke
   seed: 42
-  source_shards_dir: ./local_run/raw_shards
-  output_root: ./local_run/latents
-  checkpoint_path: ./local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt
-  source_dataset_local_root: ./local_run/raw_shards
+  source_shards_dir: ./world_model/local_run/raw_shards
+  output_root: ./world_model/local_run/latents
+  checkpoint_path: ./world_model/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt
+  source_dataset_local_root: ./world_model/local_run/raw_shards
   max_shards: 0
   skip_existing: false
   log_every_shards: 2

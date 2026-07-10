@@ -1,7 +1,7 @@
 run:
   eval_id: rollout_eval_ctx8_baseline_vs_dfv0_2xh100_20260222
   seed: 42
-  output_root: ./world_model_training/evals
+  output_root: ./world_model/training/evals
   device: cuda
   num_clips: 64
   num_viz_clips: 6
@@ -16,14 +16,14 @@ data:
 
 models:
   - name: ctx8_baseline_2xh100_60m
-    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_ctx8_2xh100_20260222_030512_run01/checkpoints/ckpt_060000000.pt
-    config_path: /home/ubuntu/maat/world_model_training/runs/dit_60m_ctx8_2xh100_20260222_030512_run01/config/resolved_config.json
+    checkpoint_path: /home/ubuntu/maat/world_model/training/runs/dit_60m_ctx8_2xh100_20260222_030512_run01/checkpoints/ckpt_060000000.pt
+    config_path: /home/ubuntu/maat/world_model/training/runs/dit_60m_ctx8_2xh100_20260222_030512_run01/config/resolved_config.json
   - name: ctx8_dfv0_2xh100_120m
-    checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_ctx8_2xh100_20260222_053047_run01/checkpoints/ckpt_120000000.pt
-    config_path: /home/ubuntu/maat/world_model_training/runs/dit_df_ctx8_2xh100_20260222_053047_run01/config/resolved_config.json
+    checkpoint_path: /home/ubuntu/maat/world_model/training/runs/dit_df_ctx8_2xh100_20260222_053047_run01/checkpoints/ckpt_120000000.pt
+    config_path: /home/ubuntu/maat/world_model/training/runs/dit_df_ctx8_2xh100_20260222_053047_run01/config/resolved_config.json
 
 vae:
   enabled: true
-  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  checkpoint_path: /home/ubuntu/maat/vae_training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
   base_channels: 64
   latent_channels: 4

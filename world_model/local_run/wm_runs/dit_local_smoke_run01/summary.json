@@ -7,6 +7,6 @@
   "final_step": 63,
   "duration_sec": 6.6567511558532715,
   "avg_samples_per_sec": 600.8937252345397,
-  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt",
+  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt",
   "world_size": 1
 }

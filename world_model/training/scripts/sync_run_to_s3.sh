@@ -4,13 +4,13 @@ set -euo pipefail
 # Upload a world-model run directory to S3.
 
 if [[ $# -lt 1 ]]; then
-  echo "Usage: bash world_model_training/scripts/sync_run_to_s3.sh <run_id>"
+  echo "Usage: bash world_model/training/scripts/sync_run_to_s3.sh <run_id>"
   exit 1
 fi
 
 RUN_ID="$1"
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-LOCAL_RUN_DIR="${LOCAL_RUN_DIR:-${REPO_ROOT}/world_model_training/runs/${RUN_ID}}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+LOCAL_RUN_DIR="${LOCAL_RUN_DIR:-${REPO_ROOT}/world_model/training/runs/${RUN_ID}}"
 S3_DEST_ROOT="${S3_DEST_ROOT:-s3://videogen-pool-v2-237586137680/world_model_v1}"
 
 AWS_PROFILE_ARGS=()

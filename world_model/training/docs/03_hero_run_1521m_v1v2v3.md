@@ -6,7 +6,7 @@ Long-run DF training on the full joint latent dataset (`v1 + v2 + v3`) with a la
 
 ## Run Configuration
 
-- Config: `world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_240m_hero.yaml`
+- Config: `world_model/training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_240m_hero.yaml`
 - Model size: `1,520,566,848` params (`d_model=2048`, `n_layers=30`, `n_heads=32`)
 - Context: `ctx8`
 - Training method: Diffusion Forcing (`rollout_steps=4`)
@@ -16,8 +16,8 @@ Long-run DF training on the full joint latent dataset (`v1 + v2 + v3`) with a la
 
 ## Dataset
 
-- Train manifest: `world_model_training/manifests/joint_v1v2v3_full_400k/train_shards.txt`
-- Val manifest: `world_model_training/manifests/joint_v1v2v3_full_400k/val_shards.txt`
+- Train manifest: `world_model/training/manifests/joint_v1v2v3_full_400k/train_shards.txt`
+- Val manifest: `world_model/training/manifests/joint_v1v2v3_full_400k/val_shards.txt`
 - Source datasets:
   - `latents_v1` (1000 shards)
   - `latents_v2` (1000 shards)

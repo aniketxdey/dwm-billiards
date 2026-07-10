@@ -2,20 +2,20 @@
 set -euo pipefail
 
 # Run a controlled DDIM-step comparison from one checkpoint/config prompt.
-# Outputs one preview run per DDIM step under world_model_inference/runs/ddim_matrix/.
+# Outputs one preview run per DDIM step under world_model/inference/runs/ddim_matrix/.
 
 INF_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPO_ROOT="$(cd "${INF_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${INF_ROOT}/../.." && pwd)"
 
 BASE_CONFIG="${BASE_CONFIG:-${INF_ROOT}/configs/preview_latest_resume360_dataset.yaml}"
 STEPS_CSV="${STEPS_CSV:-4,6,8,12,20,30}"
 HORIZON="${HORIZON:-64}"
 NUM_CLIPS="${NUM_CLIPS:-1}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-./world_model_inference/runs/ddim_matrix}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-./world_model/inference/runs/ddim_matrix}"
 PREFIX="${PREFIX:-ddim_matrix}"
 
 cd "${REPO_ROOT}"
-export PYTHONPATH="${REPO_ROOT}/world_model_inference/src:${REPO_ROOT}/world_model_training/src:${REPO_ROOT}/VAE training/src:${PYTHONPATH:-}"
+export PYTHONPATH="${REPO_ROOT}/world_model/inference/src:${REPO_ROOT}/world_model/training/src:${REPO_ROOT}/vae_training/src:${PYTHONPATH:-}"
 
 mkdir -p "${INF_ROOT}/configs/ddim_matrix"
 

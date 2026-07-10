@@ -1,10 +1,10 @@
 {
   "export_id": "golf_smoke",
   "started_at": "2026-06-19 03:25:03 UTC",
-  "source_shards_dir": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/raw_shards",
-  "source_dataset_local_root": "./local_run_golf/raw_shards",
+  "source_shards_dir": "/Users/aniketdey/Documents/GitHub/dwm-billiards/golf/local_run/raw_shards",
+  "source_dataset_local_root": "./golf/local_run/raw_shards",
   "source_dataset_s3_root": "",
-  "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt",
+  "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/golf/local_run/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt",
   "device": "cpu",
   "batch_size": 128,
   "deterministic_latent": true,

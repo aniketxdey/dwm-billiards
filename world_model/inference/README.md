@@ -37,21 +37,21 @@ The world model uses the same action schema as the data generator and latent sha
 Generate a checkpoint preview (single clip by default):
 
 ```bash
-CONFIG_PATH=world_model_inference/configs/preview_checkpoint_template.yaml \
-  bash world_model_inference/scripts/run_preview.sh
+CONFIG_PATH=world_model/inference/configs/preview_checkpoint_template.yaml \
+  bash world_model/inference/scripts/run_preview.sh
 ```
 
 Outputs go to:
-- `world_model_inference/runs/<preview_id>/summary.json`
-- `world_model_inference/runs/<preview_id>/videos/`
-- `world_model_inference/runs/<preview_id>/actions/`
+- `world_model/inference/runs/<preview_id>/summary.json`
+- `world_model/inference/runs/<preview_id>/videos/`
+- `world_model/inference/runs/<preview_id>/actions/`
 
 ## Interactive Sandbox UI (optional)
 Install optional UI deps and run:
 
 ```bash
-pip install -r world_model_inference/requirements.txt
-bash world_model_inference/scripts/run_ui.sh
+pip install -r world_model/inference/requirements.txt
+bash world_model/inference/scripts/run_ui.sh
 ```
 
 The UI lets you:
@@ -72,7 +72,7 @@ The UI lets you:
 From your local machine, launch the UI on the GPU box and tunnel it locally:
 
 ```bash
-bash world_model_inference/scripts/run_remote_ui_tunnel.sh
+bash world_model/inference/scripts/run_remote_ui_tunnel.sh
 ```
 
 Then open:
@@ -86,15 +86,15 @@ REMOTE_SSH="ubuntu@192.222.52.102" \
 REMOTE_KEY_PATH="./bill-diff.pem" \
 LOCAL_PORT=7861 \
 REMOTE_PORT=7860 \
-WM_INF_DEFAULT_CHECKPOINT="/home/ubuntu/maat/world_model_training/runs/<run_id>/checkpoints/ckpt_360000000.pt" \
-bash world_model_inference/scripts/run_remote_ui_tunnel.sh
+WM_INF_DEFAULT_CHECKPOINT="/home/ubuntu/maat/world_model/training/runs/<run_id>/checkpoints/ckpt_360000000.pt" \
+bash world_model/inference/scripts/run_remote_ui_tunnel.sh
 ```
 
 ## Minimal Game Route (start button + rolling canvas + click actions)
 For the stripped interface you asked for:
 
 ```bash
-bash world_model_inference/scripts/run_remote_game_tunnel.sh
+bash world_model/inference/scripts/run_remote_game_tunnel.sh
 ```
 
 Then open:
@@ -112,7 +112,7 @@ Flow:
 For lower-latency interaction than Gradio image updates, use the websocket route:
 
 ```bash
-bash world_model_inference/scripts/run_remote_live_play_tunnel.sh
+bash world_model/inference/scripts/run_remote_live_play_tunnel.sh
 ```
 
 Then open:
@@ -137,7 +137,7 @@ Notes:
   - `quality`: higher DDIM, lower FPS, higher JPEG quality
 
 Benchmark outputs (when `bench` is enabled):
-- default root: `world_model_inference/runs/live_play_bench/`
+- default root: `world_model/inference/runs/live_play_bench/`
 - per-session files:
   - `manifest.json`
   - `timings.jsonl`
@@ -149,17 +149,17 @@ Benchmark outputs (when `bench` is enabled):
 Run one preview per DDIM step from a single base config:
 
 ```bash
-BASE_CONFIG=world_model_inference/configs/preview_latest_resume360_dataset.yaml \
+BASE_CONFIG=world_model/inference/configs/preview_latest_resume360_dataset.yaml \
 STEPS_CSV=4,6,8,12,20,30 \
 HORIZON=64 \
 NUM_CLIPS=1 \
 PREFIX=ddim_matrix \
-bash world_model_inference/scripts/benchmark_ddim_matrix.sh
+bash world_model/inference/scripts/benchmark_ddim_matrix.sh
 ```
 
 Outputs:
-- generated configs: `world_model_inference/configs/ddim_matrix/`
-- preview runs: `world_model_inference/runs/ddim_matrix/`
+- generated configs: `world_model/inference/configs/ddim_matrix/`
+- preview runs: `world_model/inference/runs/ddim_matrix/`
 
 ## Notes / Constraints
 - On a single machine with both GPUs saturated by training, preview generation should run at checkpoint boundaries (or on another instance) to avoid OOM/interference.

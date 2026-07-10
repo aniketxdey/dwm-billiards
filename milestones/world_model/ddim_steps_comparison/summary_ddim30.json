@@ -3,8 +3,8 @@
   "created_at": "2026-02-28 17:55:10 UTC",
   "model": {
     "name": "resume360_1521m",
-    "checkpoint_path": "/home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume360m_20260226_181315_run01/checkpoints/ckpt_360000000.pt",
-    "train_config_path": "/home/ubuntu/maat/world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_360m_resume_lr25e5.yaml",
+    "checkpoint_path": "/home/ubuntu/maat/world_model/training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume360m_20260226_181315_run01/checkpoints/ckpt_360000000.pt",
+    "train_config_path": "/home/ubuntu/maat/world_model/training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_360m_resume_lr25e5.yaml",
     "context_len": 8
   },
   "source": "dataset",

@@ -1,8 +1,8 @@
 run:
   id_prefix: dit_local_smoke
   seed: 42
-  output_root: ./local_run/wm_runs
-  source_latent_local_root: ./local_run/latents/local_smoke/shards
+  output_root: ./world_model/local_run/wm_runs
+  source_latent_local_root: ./world_model/local_run/latents/local_smoke/shards
   target_samples: 4000
   checkpoint_every_samples: 4000
   log_every_steps: 10
@@ -10,7 +10,7 @@ run:
   save_optimizer_state: false
 
 data:
-  shards_dir: ./local_run/latents/local_smoke/shards
+  shards_dir: ./world_model/local_run/latents/local_smoke/shards
   context_len: 4
   val_shards: 1
   batch_size: 64

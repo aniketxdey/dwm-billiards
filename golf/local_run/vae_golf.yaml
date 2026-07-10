@@ -4,8 +4,8 @@
 run:
   id_prefix: vae_golf
   seed: 42
-  output_root: ./local_run_golf/vae_runs
-  dataset_local_root: ./local_run_golf/raw_shards_main
+  output_root: ./golf/local_run/vae_runs
+  dataset_local_root: ./golf/local_run/raw_shards_main
   target_frames: 4000000
   milestone_frames: []
   checkpoint_every_frames: 1000000
@@ -15,7 +15,7 @@ run:
 
 data:
   source: shards
-  shards_dir: ./local_run_golf/raw_shards_main
+  shards_dir: ./golf/local_run/raw_shards_main
   shuffle_shards: true
   shuffle_frames_within_shard: true
   batch_size: 128

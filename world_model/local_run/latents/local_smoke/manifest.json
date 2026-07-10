@@ -1,10 +1,10 @@
 {
   "export_id": "local_smoke",
   "started_at": "2026-06-09 17:10:33 UTC",
-  "source_shards_dir": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/raw_shards",
-  "source_dataset_local_root": "./local_run/raw_shards",
+  "source_shards_dir": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/raw_shards",
+  "source_dataset_local_root": "./world_model/local_run/raw_shards",
   "source_dataset_s3_root": "",
-  "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt",
+  "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt",
   "device": "cpu",
   "batch_size": 128,
   "deterministic_latent": true,

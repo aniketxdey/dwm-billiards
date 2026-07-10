@@ -1,8 +1,8 @@
 run:
   id_prefix: vae_local_smoke
   seed: 42
-  output_root: ./local_run/vae_runs
-  dataset_local_root: ./local_run/raw_shards
+  output_root: ./world_model/local_run/vae_runs
+  dataset_local_root: ./world_model/local_run/raw_shards
   target_frames: 6000
   milestone_frames: []
   checkpoint_every_frames: 6000
@@ -12,7 +12,7 @@ run:
 
 data:
   source: shards
-  shards_dir: ./local_run/raw_shards
+  shards_dir: ./world_model/local_run/raw_shards
   shuffle_shards: true
   shuffle_frames_within_shard: true
   batch_size: 64

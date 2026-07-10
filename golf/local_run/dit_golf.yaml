@@ -2,8 +2,8 @@
 run:
   id_prefix: dit_golf_base
   seed: 42
-  output_root: ./local_run_golf/wm_runs
-  source_latent_local_root: ./local_run_golf/latents/golf_main/shards
+  output_root: ./golf/local_run/wm_runs
+  source_latent_local_root: ./golf/local_run/latents/golf_main/shards
   target_samples: 80000000
   checkpoint_every_samples: 20000000
   log_every_steps: 100
@@ -11,7 +11,7 @@ run:
   save_optimizer_state: true
 
 data:
-  shards_dir: ./local_run_golf/latents/golf_main/shards
+  shards_dir: ./golf/local_run/latents/golf_main/shards
   context_len: 8
   val_shards: 4
   batch_size: 256

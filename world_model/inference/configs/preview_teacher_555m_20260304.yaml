@@ -1,7 +1,7 @@
 run:
   preview_id: preview_teacher_555m_20260304
   seed: 42
-  output_root: ./world_model_inference/runs
+  output_root: ./world_model/inference/runs
   device: cuda
   ddim_steps: 10
   horizon: 32
@@ -11,16 +11,16 @@ run:
 
 model:
   name: teacher_1521m_ckpt555m
-  checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/checkpoints/ckpt_555000000.pt
-  train_config_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/config/resolved_config.json
+  checkpoint_path: /home/ubuntu/maat/world_model/training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/checkpoints/ckpt_555000000.pt
+  train_config_path: /home/ubuntu/maat/world_model/training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01/config/resolved_config.json
 
 data:
-  eval_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
+  eval_shards_manifest: /home/ubuntu/maat/world_model/training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
   sample_from: eval
 
 vae:
   enabled: true
-  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
+  checkpoint_path: /home/ubuntu/maat/vae_training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_60000000.pt
   base_channels: 64
   latent_channels: 4
 

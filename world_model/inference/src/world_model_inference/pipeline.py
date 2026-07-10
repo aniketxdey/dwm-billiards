@@ -249,7 +249,7 @@ def run_preview_from_config(cfg: Dict[str, Any], engine: InferenceEngine) -> Pre
     set_seed(int(run_cfg.get("seed", 42)))
 
     preview_id = str(run_cfg.get("preview_id") or f"preview_{now_utc_stamp()}")
-    out_root = ensure_dir(Path(str(run_cfg.get("output_root", "./world_model_inference/runs"))).resolve())
+    out_root = ensure_dir(Path(str(run_cfg.get("output_root", "./world_model/inference/runs"))).resolve())
     out_dir = ensure_dir(out_root / preview_id)
 
     prompt = build_prompt_from_config(cfg, engine)

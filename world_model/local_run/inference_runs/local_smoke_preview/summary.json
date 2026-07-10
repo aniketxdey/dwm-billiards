@@ -3,8 +3,8 @@
   "created_at": "2026-06-09 17:11:53 UTC",
   "model": {
     "name": "dit_local_smoke",
-    "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt",
-    "train_config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/wm_smoke.yaml",
+    "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt",
+    "train_config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/wm_smoke.yaml",
     "context_len": 4
   },
   "source": "dataset",
@@ -15,13 +15,13 @@
   "device": "cpu",
   "clip_meta": [
     {
-      "shard": "local_run/latents/local_smoke/shards/latent_shard_00005.npz",
+      "shard": "world_model/local_run/latents/local_smoke/shards/latent_shard_00005.npz",
       "episode": 0,
       "anchor_t": 87,
       "episode_length": 120
     },
     {
-      "shard": "local_run/latents/local_smoke/shards/latent_shard_00005.npz",
+      "shard": "world_model/local_run/latents/local_smoke/shards/latent_shard_00005.npz",
       "episode": 5,
       "anchor_t": 50,
       "episode_length": 120

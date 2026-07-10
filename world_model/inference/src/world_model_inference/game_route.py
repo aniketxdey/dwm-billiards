@@ -375,7 +375,7 @@ def _start_game(
     first_frame = _decode_one_frame(engine.vae, ctx_t, engine.device)
 
     session_id = f"game_{time.strftime('%Y%m%d_%H%M%S', time.gmtime())}_{uuid.uuid4().hex[:6]}"
-    output_dir = Path("./world_model_inference/runs/game_sessions").resolve() / session_id
+    output_dir = Path("./world_model/inference/runs/game_sessions").resolve() / session_id
     output_dir.mkdir(parents=True, exist_ok=True)
 
     state: Dict[str, Any] = {
@@ -790,7 +790,7 @@ def _export_game(state: Dict[str, Any] | None, fps: int):
     if not frames:
         return None, {"error": "No frames to export."}
 
-    out_dir = Path(str(state.get("output_dir", "./world_model_inference/runs/game_sessions")))
+    out_dir = Path(str(state.get("output_dir", "./world_model/inference/runs/game_sessions")))
     out_dir.mkdir(parents=True, exist_ok=True)
     video_path = out_dir / "gameplay.mp4"
     actions_path = out_dir / "actions_log.json"
@@ -814,7 +814,7 @@ def _export_game(state: Dict[str, Any] | None, fps: int):
 def build_game_demo() -> "gr.Blocks":
     """Build the Gradio app with controls + timer-driven generation."""
     if gr is None:
-        raise RuntimeError("gradio is not installed. Install with: pip install -r world_model_inference/requirements.txt")
+        raise RuntimeError("gradio is not installed. Install with: pip install -r world_model/inference/requirements.txt")
 
     default_train_config = os.environ.get("WM_INF_DEFAULT_TRAIN_CONFIG", "").strip()
     default_checkpoint = os.environ.get("WM_INF_DEFAULT_CHECKPOINT", "").strip()

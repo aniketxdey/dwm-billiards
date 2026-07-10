@@ -2,10 +2,10 @@
 run:
   export_id: golf_main
   seed: 42
-  source_shards_dir: ./local_run_golf/raw_shards_main
-  output_root: ./local_run_golf/latents
-  checkpoint_path: ./local_run_golf/vae_runs/vae_golf_run01/checkpoints/ckpt_4000000.pt
-  source_dataset_local_root: ./local_run_golf/raw_shards_main
+  source_shards_dir: ./golf/local_run/raw_shards_main
+  output_root: ./golf/local_run/latents
+  checkpoint_path: ./golf/local_run/vae_runs/vae_golf_run01/checkpoints/ckpt_4000000.pt
+  source_dataset_local_root: ./golf/local_run/raw_shards_main
   max_shards: 0
   skip_existing: true
   log_every_shards: 10

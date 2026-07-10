@@ -8,30 +8,30 @@
 # Estimated spend on a ~$0.5/hr 4090: ~$15-25. Set START_STAGE to resume midway.
 #
 # Usage:
-#   bash local_run_golf/run_golf_pipeline.sh
-#   EPISODES=10000 START_STAGE=3 bash local_run_golf/run_golf_pipeline.sh
+#   bash golf/local_run/run_golf_pipeline.sh
+#   EPISODES=10000 START_STAGE=3 bash golf/local_run/run_golf_pipeline.sh
 #
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "${REPO_ROOT}"
-export PYTHONPATH="${REPO_ROOT}/world_model_inference/src:${REPO_ROOT}/world_model_training/src:${REPO_ROOT}/VAE training/src:${PYTHONPATH:-}"
+export PYTHONPATH="${REPO_ROOT}/world_model/inference/src:${REPO_ROOT}/world_model/training/src:${REPO_ROOT}/vae_training/src:${PYTHONPATH:-}"
 
 PY="${PY:-python3}"
-CFG="local_run_golf"
+CFG="golf/local_run"
 
 # Data parameters
 EPISODES="${EPISODES:-8000}"
 SHARD_SIZE="${SHARD_SIZE:-100}"
 FRAMES="${FRAMES:-600}"
 WORKERS="${WORKERS:-$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}"
-DATA_DIR="${REPO_ROOT}/local_run_golf/raw_shards_main"
+DATA_DIR="${REPO_ROOT}/golf/local_run/raw_shards_main"
 
 # Deterministic run-ids (referenced by the YAML configs)
 VAE_RUN_ID="vae_golf_run01"
 DIT_BASE_RUN_ID="dit_golf_base_run01"
 DIT_DF_RUN_ID="dit_golf_df_run01"
-BASE_CKPT="${REPO_ROOT}/local_run_golf/wm_runs/${DIT_BASE_RUN_ID}/checkpoints/ckpt_080000000.pt"
+BASE_CKPT="${REPO_ROOT}/golf/local_run/wm_runs/${DIT_BASE_RUN_ID}/checkpoints/ckpt_080000000.pt"
 
 START_STAGE="${START_STAGE:-1}"
 
@@ -43,7 +43,7 @@ echo "=================================================="
 # ---- Stage 1: data generation (CPU) ----------------------------------------
 if [ "${START_STAGE}" -le 1 ]; then
   echo "[1/6] Generating golf dataset -> ${DATA_DIR}"
-  "${PY}" data_generation_package_golf/generate_golf_shards.py \
+  "${PY}" golf/rl_data_gen/generate_golf_shards.py \
     --episodes "${EPISODES}" --shard-size "${SHARD_SIZE}" --frames "${FRAMES}" \
     --workers "${WORKERS}" --output-dir "${DATA_DIR}" --dry-run
 fi
@@ -84,5 +84,5 @@ if [ "${START_STAGE}" -le 6 ]; then
 fi
 
 echo "=================================================="
-echo " DONE. Outputs under local_run_golf/{vae_runs,latents,wm_runs,inference_runs}"
+echo " DONE. Outputs under golf/local_run/{vae_runs,latents,wm_runs,inference_runs}"
 echo "=================================================="

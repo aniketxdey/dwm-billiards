@@ -120,7 +120,7 @@ def _build_cfg(
             "ddim_steps": int(ddim_steps),
             "video_fps": int(fps),
             "num_clips": 1,
-            "output_root": "./world_model_inference/runs/ui_previews",
+            "output_root": "./world_model/inference/runs/ui_previews",
         }
     )
     cfg["model"].update(
@@ -244,7 +244,7 @@ def _session_init(
     )
 
     session_id = f"live_{time.strftime('%Y%m%d_%H%M%S', time.gmtime())}_{uuid.uuid4().hex[:6]}"
-    output_dir = Path("./world_model_inference/runs/live_sessions").resolve() / session_id
+    output_dir = Path("./world_model/inference/runs/live_sessions").resolve() / session_id
     output_dir.mkdir(parents=True, exist_ok=True)
 
     state = {
@@ -476,7 +476,7 @@ def _session_export_video(session_state: Dict[str, Any] | None, fps: int):
     if not frames:
         return None, {"error": "No frames in session buffer yet."}
 
-    output_dir = Path(str(session_state.get("output_dir", "./world_model_inference/runs/live_sessions")))
+    output_dir = Path(str(session_state.get("output_dir", "./world_model/inference/runs/live_sessions")))
     output_dir.mkdir(parents=True, exist_ok=True)
     out_path = output_dir / "live_session.mp4"
 
@@ -494,7 +494,7 @@ def _session_export_video(session_state: Dict[str, Any] | None, fps: int):
 
 def build_demo() -> "gr.Blocks":
     if gr is None:
-        raise RuntimeError("gradio is not installed. Install with: pip install -r world_model_inference/requirements.txt")
+        raise RuntimeError("gradio is not installed. Install with: pip install -r world_model/inference/requirements.txt")
 
     default_train_config = os.environ.get("WM_INF_DEFAULT_TRAIN_CONFIG", "").strip()
     default_checkpoint = os.environ.get("WM_INF_DEFAULT_CHECKPOINT", "").strip()
@@ -520,7 +520,7 @@ def build_demo() -> "gr.Blocks":
             with gr.Column(scale=2):
                 train_config = gr.Textbox(
                     label="Train Config Path",
-                    placeholder="world_model_training/configs/...yaml",
+                    placeholder="world_model/training/configs/...yaml",
                     value=default_train_config,
                 )
                 checkpoint = gr.Textbox(
@@ -535,7 +535,7 @@ def build_demo() -> "gr.Blocks":
                 )
                 data_path = gr.Textbox(
                     label="Eval Shards Manifest or Shards Dir",
-                    placeholder="world_model_training/manifests/.../eval_shards.txt OR /path/to/shards",
+                    placeholder="world_model/training/manifests/.../eval_shards.txt OR /path/to/shards",
                     value=default_data_path,
                 )
             with gr.Column(scale=1):

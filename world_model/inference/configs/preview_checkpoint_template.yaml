@@ -1,7 +1,7 @@
 run:
   preview_id: ""
   seed: 42
-  output_root: ./world_model_inference/runs
+  output_root: ./world_model/inference/runs
   device: cuda
   ddim_steps: 20
   horizon: 32
@@ -11,16 +11,16 @@ run:
 
 model:
   name: hero_1521m
-  checkpoint_path: /home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_hero_20260224_030204_run01/checkpoints/ckpt_072000000.pt
-  train_config_path: world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_240m_hero.yaml
+  checkpoint_path: /home/ubuntu/maat/world_model/training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_hero_20260224_030204_run01/checkpoints/ckpt_072000000.pt
+  train_config_path: world_model/training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_240m_hero.yaml
 
 data:
-  eval_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
+  eval_shards_manifest: /home/ubuntu/maat/world_model/training/manifests/joint_v1v2v3_full_400k/eval_shards.txt
   sample_from: eval
 
 vae:
   enabled: true
-  checkpoint_path: /home/ubuntu/maat/VAE training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_060000000.pt
+  checkpoint_path: /home/ubuntu/maat/vae_training/runs/vae_60m_1xa100_20260220_204310_run01/checkpoints/ckpt_060000000.pt
   base_channels: 64
   latent_channels: 4
 

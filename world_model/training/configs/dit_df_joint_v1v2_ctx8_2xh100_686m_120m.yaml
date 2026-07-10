@@ -1,7 +1,7 @@
 run:
   id_prefix: dit_df_joint_v1v2_ctx8_2xh100_686m
   seed: 52
-  output_root: ./world_model_training/runs
+  output_root: ./world_model/training/runs
   source_latent_s3_root: s3://videogen-pool-v2-237586137680/latents_v1 + s3://videogen-pool-v2-237586137680/latents_v2
   source_latent_local_root: /home/ubuntu/neural-pool (joint via manifests)
   target_samples: 120000000
@@ -13,8 +13,8 @@ run:
 data:
   # Kept for preflight/disk checks; training reads manifests below.
   shards_dir: /home/ubuntu/neural-pool/latents_v2/latents_v2diverse_20260222_154743_watch01/shards
-  train_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2_full_200k/train_shards.txt
-  val_shards_manifest: /home/ubuntu/maat/world_model_training/manifests/joint_v1v2_full_200k/val_shards.txt
+  train_shards_manifest: /home/ubuntu/maat/world_model/training/manifests/joint_v1v2_full_200k/train_shards.txt
+  val_shards_manifest: /home/ubuntu/maat/world_model/training/manifests/joint_v1v2_full_200k/val_shards.txt
   context_len: 8
   val_shards: 0
   batch_size: 192

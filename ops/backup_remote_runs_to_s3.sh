@@ -21,32 +21,32 @@ MANIFEST_LOCAL="${OPS_DIR}/backup_manifest_${BACKUP_TAG}.txt"
   echo "s3_root=${S3_ROOT}"
   echo "aws_profile=${AWS_PROFILE}"
   echo "paths:"
-  echo " - /home/ubuntu/maat/world_model_training/runs"
-  echo " - /home/ubuntu/maat/world_model_training/evals"
-  echo " - /home/ubuntu/maat/VAE training/runs"
-  echo " - /home/ubuntu/maat/world_model_inference/runs"
+  echo " - /home/ubuntu/maat/world_model/training/runs"
+  echo " - /home/ubuntu/maat/world_model/training/evals"
+  echo " - /home/ubuntu/maat/vae_training/runs"
+  echo " - /home/ubuntu/maat/world_model/inference/runs"
 } > "${MANIFEST_LOCAL}"
 
 aws "${AWS_PROFILE_ARGS[@]}" s3 cp "${MANIFEST_LOCAL}" "${S3_ROOT}/backup_manifest.txt" --only-show-errors
 
 aws "${AWS_PROFILE_ARGS[@]}" s3 sync \
-  "/home/ubuntu/maat/world_model_training/runs" \
-  "${S3_ROOT}/remote/world_model_training/runs" \
+  "/home/ubuntu/maat/world_model/training/runs" \
+  "${S3_ROOT}/remote/world_model/training/runs" \
   --only-show-errors
 
 aws "${AWS_PROFILE_ARGS[@]}" s3 sync \
-  "/home/ubuntu/maat/world_model_training/evals" \
-  "${S3_ROOT}/remote/world_model_training/evals" \
+  "/home/ubuntu/maat/world_model/training/evals" \
+  "${S3_ROOT}/remote/world_model/training/evals" \
   --only-show-errors
 
 aws "${AWS_PROFILE_ARGS[@]}" s3 sync \
-  "/home/ubuntu/maat/VAE training/runs" \
-  "${S3_ROOT}/remote/VAE training/runs" \
+  "/home/ubuntu/maat/vae_training/runs" \
+  "${S3_ROOT}/remote/vae_training/runs" \
   --only-show-errors
 
 aws "${AWS_PROFILE_ARGS[@]}" s3 sync \
-  "/home/ubuntu/maat/world_model_inference/runs" \
-  "${S3_ROOT}/remote/world_model_inference/runs" \
+  "/home/ubuntu/maat/world_model/inference/runs" \
+  "${S3_ROOT}/remote/world_model/inference/runs" \
   --only-show-errors
 
 echo "backup_complete ${S3_ROOT}"

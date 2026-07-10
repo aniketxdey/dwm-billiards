@@ -9,10 +9,10 @@
 ## Latest Completed Major Run
 ### 1521M DF resume to 480M samples
 - Run ID: `dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume480m_20260301_080158_run01`
-- Config: `world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_480m_resume_lr1e5.yaml`
+- Config: `world_model/training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_480m_resume_lr1e5.yaml`
 - Training mode: `dit_df_v0` (`rollout_steps=4`)
 - Final checkpoint:
-  - `/home/ubuntu/maat/world_model_training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume480m_20260301_080158_run01/checkpoints/ckpt_480000000.pt`
+  - `/home/ubuntu/maat/world_model/training/runs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume480m_20260301_080158_run01/checkpoints/ckpt_480000000.pt`
 - Summary:
   - `processed_samples=480,000,000`
   - `avg_samples_per_sec=1382.63`
@@ -20,7 +20,7 @@
 ## Rollout Eval (360M vs 480M)
 - Eval ID: `rollout_eval_joint_1521m_360m_vs_480m_20260302`
 - Summary path:
-  - `/home/ubuntu/maat/world_model_training/evals/rollout_eval_joint_1521m_360m_vs_480m_20260302/summary.json`
+  - `/home/ubuntu/maat/world_model/training/evals/rollout_eval_joint_1521m_360m_vs_480m_20260302/summary.json`
 - Key result:
   - `480M` wins most horizons/metrics (not uniformly every metric at every horizon).
 - Decision:
@@ -29,14 +29,14 @@
 ## Overnight Continuation (In Progress)
 ### 1521M DF resume to 555M samples
 - Run ID: `dit_df_joint_v1v2v3_ctx8_2xh100_1521m_resume555m_20260303_045021_run01`
-- Config: `world_model_training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_555m_resume_lr1e5.yaml`
+- Config: `world_model/training/configs/dit_df_joint_v1v2v3_ctx8_2xh100_1521m_555m_resume_lr1e5.yaml`
 - Resume checkpoint:
   - `.../resume480m.../checkpoints/ckpt_480000000.pt`
 - Target samples:
   - `555,000,000`
 
 ## Inference Track Status
-- `world_model_inference/` now contains:
+- `world_model/inference/` now contains:
   - preview pipeline + CLI
   - Gradio sandbox route
   - low-latency websocket live-play route

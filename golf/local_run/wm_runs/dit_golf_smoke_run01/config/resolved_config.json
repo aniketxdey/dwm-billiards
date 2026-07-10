@@ -2,9 +2,9 @@
   "run": {
     "id_prefix": "dit_golf_smoke",
     "seed": 42,
-    "output_root": "./local_run_golf/wm_runs",
+    "output_root": "./golf/local_run/wm_runs",
     "source_latent_s3_root": "",
-    "source_latent_local_root": "./local_run_golf/latents/golf_smoke/shards",
+    "source_latent_local_root": "./golf/local_run/latents/golf_smoke/shards",
     "target_samples": 4000,
     "checkpoint_every_samples": 4000,
     "log_every_steps": 10,
@@ -12,7 +12,7 @@
     "save_optimizer_state": false
   },
   "data": {
-    "shards_dir": "./local_run_golf/latents/golf_smoke/shards",
+    "shards_dir": "./golf/local_run/latents/golf_smoke/shards",
     "shards_manifest": "",
     "train_shards_manifest": "",
     "val_shards_manifest": "",

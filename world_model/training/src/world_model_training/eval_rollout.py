@@ -24,7 +24,7 @@ DEFAULT_CFG: Dict[str, Any] = {
     "run": {
         "eval_id": "",
         "seed": 42,
-        "output_root": "./world_model_training/evals",
+        "output_root": "./world_model/training/evals",
         "device": "cuda",
         "num_clips": 64,
         "num_viz_clips": 6,

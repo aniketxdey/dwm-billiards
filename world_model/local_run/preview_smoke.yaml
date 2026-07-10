@@ -1,7 +1,7 @@
 run:
   preview_id: local_smoke_preview
   seed: 42
-  output_root: ./local_run/inference_runs
+  output_root: ./world_model/local_run/inference_runs
   device: cpu
   ddim_steps: 8
   horizon: 8
@@ -11,17 +11,17 @@ run:
 
 model:
   name: dit_local_smoke
-  checkpoint_path: ./local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt
-  train_config_path: ./local_run/wm_smoke.yaml
+  checkpoint_path: ./world_model/local_run/wm_runs/dit_local_smoke_run01/checkpoints/ckpt_000004000.pt
+  train_config_path: ./world_model/local_run/wm_smoke.yaml
 
 data:
-  shards_dir: ./local_run/latents/local_smoke/shards
+  shards_dir: ./world_model/local_run/latents/local_smoke/shards
   val_shards: 1
   sample_from: eval
 
 vae:
   enabled: true
-  checkpoint_path: ./local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt
+  checkpoint_path: ./world_model/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt
   base_channels: 16
   latent_channels: 4
 

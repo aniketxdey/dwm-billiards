@@ -5,7 +5,7 @@ set -euo pipefail
 # Generates one preview run per (seed, force, direction) tuple.
 
 INF_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPO_ROOT="$(cd "${INF_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${INF_ROOT}/../.." && pwd)"
 
 BASE_CONFIG="${BASE_CONFIG:-${INF_ROOT}/configs/preview_latest_resume360_preset_mouseish.yaml}"
 FORCES_CSV="${FORCES_CSV:-20,40,80,120,180,240}"
@@ -14,13 +14,13 @@ DIRECTIONS_CSV="${DIRECTIONS_CSV:-diag_up_right,diag_up_left}"
 DDIM_STEPS="${DDIM_STEPS:-12}"
 HORIZON="${HORIZON:-96}"
 NUM_CLIPS="${NUM_CLIPS:-2}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-./world_model_inference/runs/action_scale_sweep}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-./world_model/inference/runs/action_scale_sweep}"
 PREFIX="${PREFIX:-action_scale}"
 SHOT_FRAME="${SHOT_FRAME:-6}"
 Y_RATIO="${Y_RATIO:-0.7}" # force_y = sign_y * force * Y_RATIO
 
 cd "${REPO_ROOT}"
-export PYTHONPATH="${REPO_ROOT}/world_model_inference/src:${REPO_ROOT}/world_model_training/src:${REPO_ROOT}/VAE training/src:${PYTHONPATH:-}"
+export PYTHONPATH="${REPO_ROOT}/world_model/inference/src:${REPO_ROOT}/world_model/training/src:${REPO_ROOT}/vae_training/src:${PYTHONPATH:-}"
 
 mkdir -p "${INF_ROOT}/configs/action_scale_sweep"
 

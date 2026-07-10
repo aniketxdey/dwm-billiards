@@ -35,12 +35,12 @@
     {
       "run_id": "dit_60m_1xa100_20260221_185520_resume5m",
       "label": "ctx8 baseline 60M",
-      "config": "world_model_training/configs/dit_60m_1xa100.yaml"
+      "config": "world_model/training/configs/dit_60m_1xa100.yaml"
     },
     {
       "run_id": "dit_60m_ctx12_1xa100_20260221_192300_run01",
       "label": "ctx12 ablation 60M",
-      "config": "world_model_training/configs/dit_60m_context12_1xa100.yaml"
+      "config": "world_model/training/configs/dit_60m_context12_1xa100.yaml"
     },
     {
       "run_id": "ctx8_dfv0_2xh100_120m",

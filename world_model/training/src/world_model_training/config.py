@@ -11,7 +11,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "run": {
         "id_prefix": "dit_base",
         "seed": 42,
-        "output_root": "./world_model_training/runs",
+        "output_root": "./world_model/training/runs",
         "source_latent_s3_root": "",
         "source_latent_local_root": "",
         "target_samples": 1_000_000,

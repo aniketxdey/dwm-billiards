@@ -1,7 +1,7 @@
 run:
   id_prefix: dit_5m_1xa100
   seed: 42
-  output_root: ./world_model_training/runs
+  output_root: ./world_model/training/runs
   source_latent_s3_root: s3://videogen-pool-v2-237586137680/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01
   source_latent_local_root: /home/ubuntu/neural-pool/latents_v1/latents_60m_from_vae_60m_20260220_204310_run01
   target_samples: 5000000

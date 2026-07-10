@@ -2,7 +2,7 @@
 set -euo pipefail
 
 WM_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPO_ROOT="$(cd "${WM_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${WM_ROOT}/../.." && pwd)"
 CONFIG_PATH="${CONFIG_PATH:-${WM_ROOT}/configs/dit_5m_1xa100.yaml}"
 RUN_ID="${RUN_ID:-}"
 RUN_NOTES="${RUN_NOTES:-}"
@@ -11,7 +11,7 @@ RESUME_CKPT="${RESUME_CKPT:-}"
 if [[ -z "${RUN_ID}" ]]; then
   echo "Missing RUN_ID."
   echo "Example:"
-  echo "  RUN_ID=dit_5m_1xa100_20260221_000000_run01 bash \"world_model_training/scripts/run_train_1xa100.sh\""
+  echo "  RUN_ID=dit_5m_1xa100_20260221_000000_run01 bash \"world_model/training/scripts/run_train_1xa100.sh\""
   exit 1
 fi
 

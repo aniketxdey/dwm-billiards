@@ -12,7 +12,7 @@ DEFAULT_PREVIEW_CONFIG: Dict[str, Any] = {
     "run": {
         "preview_id": "",
         "seed": 42,
-        "output_root": "./world_model_inference/runs",
+        "output_root": "./world_model/inference/runs",
         "device": "cuda",
         "ddim_steps": 20,
         "horizon": 32,

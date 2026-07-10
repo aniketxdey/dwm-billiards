@@ -2,7 +2,7 @@
   "run": {
     "preview_id": "golf_smoke_preview",
     "seed": 42,
-    "output_root": "./local_run_golf/inference_runs",
+    "output_root": "./golf/local_run/inference_runs",
     "device": "cpu",
     "ddim_steps": 8,
     "horizon": 8,
@@ -12,11 +12,11 @@
   },
   "model": {
     "name": "dit_golf_smoke",
-    "checkpoint_path": "./local_run_golf/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
-    "train_config_path": "./local_run_golf/wm_smoke.yaml"
+    "checkpoint_path": "./golf/local_run/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
+    "train_config_path": "./golf/local_run/wm_smoke.yaml"
   },
   "data": {
-    "shards_dir": "./local_run_golf/latents/golf_smoke/shards",
+    "shards_dir": "./golf/local_run/latents/golf_smoke/shards",
     "shards_manifest": "",
     "train_shards_manifest": "",
     "val_shards_manifest": "",
@@ -26,7 +26,7 @@
   },
   "vae": {
     "enabled": true,
-    "checkpoint_path": "./local_run_golf/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt",
+    "checkpoint_path": "./golf/local_run/vae_runs/vae_golf_smoke_run01/checkpoints/ckpt_0006000.pt",
     "base_channels": 16,
     "latent_channels": 4
   },

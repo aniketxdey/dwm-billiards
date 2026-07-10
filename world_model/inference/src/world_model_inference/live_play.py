@@ -478,7 +478,7 @@ class LiveGameServer:
         return engine
 
     def _bench_root(self) -> Path:
-        root = os.environ.get("WM_LIVE_BENCH_ROOT", "./world_model_inference/runs/live_play_bench").strip()
+        root = os.environ.get("WM_LIVE_BENCH_ROOT", "./world_model/inference/runs/live_play_bench").strip()
         return Path(root).resolve()
 
     @staticmethod

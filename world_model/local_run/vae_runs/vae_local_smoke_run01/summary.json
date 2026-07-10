@@ -5,5 +5,5 @@
   "final_step": 94,
   "duration_sec": 36.95383620262146,
   "avg_fps": 162.364739809459,
-  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt"
+  "final_checkpoint": "/Users/aniketdey/Documents/GitHub/dwm-billiards/world_model/local_run/vae_runs/vae_local_smoke_run01/checkpoints/ckpt_0006000.pt"
 }

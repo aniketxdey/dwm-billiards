@@ -1,27 +1,27 @@
 {
   "preview_id": "golf_smoke_preview",
-  "created_at": "2026-06-19 03:26:27 UTC",
+  "created_at": "2026-07-10 04:14:32 UTC",
   "model": {
     "name": "dit_golf_smoke",
-    "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
-    "train_config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/local_run_golf/wm_smoke.yaml",
+    "checkpoint_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/golf/local_run/wm_runs/dit_golf_smoke_run01/checkpoints/ckpt_000004000.pt",
+    "train_config_path": "/Users/aniketdey/Documents/GitHub/dwm-billiards/golf/local_run/wm_smoke.yaml",
     "context_len": 4
   },
   "source": "dataset",
   "num_clips": 2,
   "horizon": 8,
   "ddim_steps": 8,
-  "rollout_seconds": 0.1994953155517578,
+  "rollout_seconds": 0.04363679885864258,
   "device": "cpu",
   "clip_meta": [
     {
-      "shard": "local_run_golf/latents/golf_smoke/shards/latent_shard_00005.npz",
+      "shard": "golf/local_run/latents/golf_smoke/shards/latent_shard_00005.npz",
       "episode": 0,
       "anchor_t": 87,
       "episode_length": 120
     },
     {
-      "shard": "local_run_golf/latents/golf_smoke/shards/latent_shard_00005.npz",
+      "shard": "golf/local_run/latents/golf_smoke/shards/latent_shard_00005.npz",
       "episode": 5,
       "anchor_t": 50,
       "episode_length": 120

@@ -4,7 +4,7 @@ set -euo pipefail
 # Preflight before launching world-model training on 2x H100 (DDP).
 
 WM_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPO_ROOT="$(cd "${WM_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${WM_ROOT}/../.." && pwd)"
 CONFIG_PATH="${CONFIG_PATH:-${WM_ROOT}/configs/dit_60m_2xh100_ctx8.yaml}"
 RUN_ID="${RUN_ID:-}"
 NPROC_PER_NODE="${NPROC_PER_NODE:-2}"
