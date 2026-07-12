@@ -61,6 +61,12 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "teacher_forcing_decay_samples": 20_000_000,
         "detach_predicted_context": True,
     },
+    # GameNGen-style context corruption: each context latent is independently
+    # noised to a random diffusion level in [0, tau_max] during training.
+    "context_noise": {
+        "enabled": False,
+        "tau_max": 150,
+    },
     "optimizer": {
         "lr": 2e-4,
         "weight_decay": 1e-4,

@@ -103,7 +103,12 @@ def main() -> None:
     if max_shards > 0:
         shards = shards[:max_shards]
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
     use_autocast = device.type == "cuda" and mp_dtype in (torch.float16, torch.bfloat16)
 
     model = ConvVAE(

@@ -1,0 +1,57 @@
+# Editor / tooling
+.claude/
+.cursor/
+.cursorrules
+.vscode/
+.idea/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.DS_Store
+
+# Local secrets / envs
+.env
+.env.*
+!.env.lambda.example
+.venv/
+venv/
+
+# Working-status / private research (local only — never publish)
+.AAAI27/
+.AAAI2027/
+AAAI27/
+.dwm_context/
+dwm_context/
+.PAPER_HANDOFF.md
+PAPER_HANDOFF.md
+.working_README.md
+.env.aaai27.example
+
+# AAAI / pilot / local experiment artifacts (working status)
+world_model/local_run/aaai27/
+world_model/local_run/pilot/
+world_model/local_run/wm_runs/
+world_model/local_run/**/logs/
+world_model/local_run/**/raw_shards*/
+world_model/local_run/**/vae_runs/
+world_model/local_run/**/latents/
+world_model/local_run/**/evals/
+world_model/local_run/**/figures/
+world_model/training/runs/
+vae_training/runs/
+
+# Python / build junk
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Large local artifacts
+*.pt
+*.npz
+*.mp4
+*.gif
+!milestones/**/*.gif
+!milestones/**/*.mp4
+!milestones/**/*.png

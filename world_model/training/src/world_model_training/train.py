@@ -169,6 +169,25 @@ def _df_teacher_forcing_prob(cfg: Dict[str, Any], processed_samples: int) -> flo
     return start + (end - start) * alpha
 
 
+def _corrupt_context(
+    context: torch.Tensor,
+    diffusion: GaussianDiffusion,
+    tau_max: int,
+) -> torch.Tensor:
+    """GameNGen-style context corruption.
+
+    Independently noise each context latent to a random diffusion level in
+    [0, tau_max] so the model learns to correct imperfect history.
+    context: [B, L, C, H, W]
+    """
+    b, l = context.shape[0], context.shape[1]
+    tau = torch.randint(0, tau_max + 1, (b, l), device=context.device)
+    alpha_bar = diffusion.alpha_bar[tau]  # [B, L]
+    alpha_bar = alpha_bar.view(b, l, 1, 1, 1).to(context.dtype)
+    noise = torch.randn_like(context)
+    return torch.sqrt(alpha_bar) * context + torch.sqrt(1.0 - alpha_bar) * noise
+
+
 def _df_rollout_training_loss(
     *,
     model: torch.nn.Module,
@@ -362,6 +381,8 @@ def main() -> None:
             device = torch.device("cuda")
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
+    elif torch.backends.mps.is_available() and not use_distributed:
+        device = torch.device("mps")
     else:
         device = torch.device("cpu")
 
@@ -625,6 +646,11 @@ def main() -> None:
                     ),
                 )
             else:
+                ctx_noise_cfg = cfg.get("context_noise", {})
+                if bool(ctx_noise_cfg.get("enabled", False)):
+                    context = _corrupt_context(
+                        context, diffusion, int(ctx_noise_cfg.get("tau_max", 150))
+                    )
                 t_idx = diffusion.sample_timesteps(target.shape[0], device=device)
                 loss, _, _ = diffusion.training_loss(model, context, action, target, t_idx)
 

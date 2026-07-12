@@ -100,7 +100,12 @@ def main() -> None:
 
     save_json(cfg, dirs["config"] / "resolved_config.json")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
     mp_dtype = _dtype_from_name(str(cfg["training"]["mixed_precision"]))
 
     data_source = str(cfg["data"].get("source", "frame_cache")).lower()

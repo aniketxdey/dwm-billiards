@@ -15,7 +15,9 @@ import config
 # Authentic billiard table colors
 FELT_COLOR = (39, 119, 78)  # Classic billiard green
 CUSHION_COLOR = (101, 67, 33)  # Rich mahogany wood
-POCKET_COLOR = (20, 20, 20)  # Deep black pockets
+# Dark navy pockets — distinct from the black 8-ball (20,20,20) so all 16 balls
+# are detectable in physics-grounded evaluation (AAAI-27 benchmark).
+POCKET_COLOR = (12, 28, 68)
 RAIL_HIGHLIGHT = (130, 90, 50)  # Wood highlight
 
 # Real pool ball colors (solids 1-7, black 8, stripes simulated as lighter)

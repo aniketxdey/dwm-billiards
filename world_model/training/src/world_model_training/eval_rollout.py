@@ -472,6 +472,8 @@ def main() -> None:
     requested_device = str(run_cfg.get("device", "cuda")).lower()
     if requested_device == "cuda" and torch.cuda.is_available():
         device = torch.device("cuda")
+    elif requested_device in ("cuda", "mps") and torch.backends.mps.is_available():
+        device = torch.device("mps")
     else:
         device = torch.device("cpu")
 
